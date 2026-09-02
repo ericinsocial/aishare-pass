@@ -38,6 +38,9 @@ npm run preview  # 預覽 build 結果
 | 02 | AI 能力時間線 | 5 | `#/presenter/02/0` |
 | 03 | AI 翻車 | 4 | `#/presenter/03/0` |
 | 04 | Prompt Archaeology | 4 | `#/presenter/04/0` |
+| 05 | Prompt 五大元素 | 8 | `#/presenter/05/0` |
+| 06 | Conversation | 8 | `#/presenter/06/0` |
+| 08 | IDEA → REALITY | 7 | `#/presenter/08/0` |
 | 09 | 主題揭露：會抓老鼠就是好貓 | 6 | `#/presenter/09/0` |
 | 10 | AI 工作流程 | 5 | `#/presenter/10/0` |
 | 11 | REAL WORK | 5 | `#/presenter/11/0` |
@@ -70,7 +73,7 @@ src/
   types/       Scene 與 beat 型別
 ```
 
-`src/scenes/` 另外已經有 Scene05 / Scene06 / Scene08，目前只從 `index.ts` 匯出，還沒有排進上面的 deck 順序
+Scene 07 不在 deck 裡，編號刻意不補齊
 
 Scene 圖片直接引用 repo 根目錄的原圖，未經修改
 
