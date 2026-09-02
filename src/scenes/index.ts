@@ -6,6 +6,10 @@ import { Scene04PromptArchaeology, SCENE_04_BEATS } from './Scene04PromptArchaeo
 import { Scene05PromptElements, SCENE_05_BEATS } from './Scene05PromptElements'
 import { Scene06Conversation, SCENE_06_BEATS } from './Scene06Conversation'
 import { Scene08IdeaToReality, SCENE_08_BEATS } from './Scene08IdeaToReality'
+import { Scene09, SCENE_09_BEATS } from './Scene09'
+import { Scene10, SCENE_10_BEATS } from './Scene10'
+import { Scene11, SCENE_11_BEATS } from './Scene11'
+import { Scene12, SCENE_12_BEATS } from './Scene12'
 import { Scene14, SCENE_14_BEATS } from './Scene14'
 import { Scene15, SCENE_15_BEATS } from './Scene15'
 import { Scene16, SCENE_16_BEATS } from './Scene16'
@@ -60,7 +64,31 @@ export const scenes: Scene[] = [
     beats: SCENE_08_BEATS,
     view: Scene08IdeaToReality,
   },
-  // Scene 09–13 have no final version; the deck steps from 08 straight to 14.
+  {
+    slug: '09',
+    title: '主題揭露：會抓老鼠就是好貓',
+    beats: SCENE_09_BEATS,
+    view: Scene09,
+  },
+  {
+    slug: '10',
+    title: 'AI 工作流程',
+    beats: SCENE_10_BEATS,
+    view: Scene10,
+  },
+  {
+    slug: '11',
+    title: 'REAL WORK',
+    beats: SCENE_11_BEATS,
+    view: Scene11,
+  },
+  {
+    slug: '12',
+    title: '罵得有規格',
+    beats: SCENE_12_BEATS,
+    view: Scene12,
+  },
+  // Scene 13 has no final version; the deck steps from 12 straight to 14.
   {
     slug: '14',
     title: 'DONE ≠ RIGHT',

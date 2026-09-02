@@ -1,0 +1,126 @@
+/* ---------------------------------------------------------------------
+   Scene09–Scene12 design tokens and reveal primitive.
+
+   These tokens are scoped to `.deck0912` rather than `:root` on purpose:
+   this deck names `--ink` after the dark stage ground, while the global
+   palette in global.css uses `--ink` for the light type colour. Scoping
+   keeps both meanings alive without either scene set fighting the other.
+
+   Lengths are real design pixels on the shared 1920x1080 canvas that
+   <Stage /> scales to the projector.
+   --------------------------------------------------------------------- */
+
+.deck0912 {
+  --ink: #08070b;
+  --ink-2: #100d16;
+  --paper: #f7f3ea;
+  --muted: rgba(247, 243, 234, 0.58);
+  --faint: rgba(247, 243, 234, 0.28);
+
+  --amber: #ffb547;
+  --amber-deep: #ff8a3d;
+  --cyan: #4fd8ff;
+  --cyan-deep: #17a9db;
+  --red: #ff5c5c;
+  --green: #56d38a;
+
+  --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  font-family: 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei',
+    'Hiragino Sans TC', 'Heiti TC', system-ui, -apple-system, sans-serif;
+  color: var(--paper);
+  font-weight: 400;
+}
+
+/* Scene root: fills the stage box supplied by <Stage />. */
+.deck0912.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* --- Reveal primitive ------------------------------------------------- */
+.deck0912 .rise {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.6s var(--ease) var(--d, 0ms),
+    transform 0.7s var(--ease) var(--d, 0ms),
+    filter 0.6s var(--ease) var(--d, 0ms);
+}
+.deck0912 .rise.on {
+  opacity: 1;
+  transform: none;
+}
+
+.deck0912 .rise--fade {
+  transform: none;
+}
+.deck0912 .rise--left {
+  transform: translateX(-40px);
+}
+.deck0912 .rise--right {
+  transform: translateX(40px);
+}
+.deck0912 .rise--pop {
+  transform: scale(0.86);
+}
+.deck0912 .rise--blur {
+  filter: blur(14px);
+}
+.deck0912 .rise.on.rise--blur {
+  filter: none;
+}
+
+/* Dim a whole layer when the scene moves on to its punch line. */
+.deck0912 .dimmed {
+  opacity: 0.14;
+  filter: saturate(0.4);
+  transition:
+    opacity 0.7s var(--ease),
+    filter 0.7s var(--ease);
+}
+
+/* --- Type scale -------------------------------------------------------- */
+.deck0912 .kicker {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  color: var(--amber);
+  text-transform: uppercase;
+}
+
+.deck0912 .hl-amber {
+  color: var(--amber);
+}
+.deck0912 .hl-cyan {
+  color: var(--cyan);
+}
+
+.deck0912 .grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    radial-gradient(
+      ellipse at 50% 120%,
+      rgba(255, 138, 61, 0.16),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse at 8% -10%,
+      rgba(79, 216, 255, 0.12),
+      transparent 55%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck0912 .rise,
+  .deck0912 .rise.on {
+    transition-duration: 0.01ms;
+    transform: none;
+    filter: none;
+  }
+}

@@ -1,0 +1,354 @@
+.s12 {
+  background:
+    radial-gradient(ellipse at 12% 0%, #2a1218 0%, transparent 52%),
+    radial-gradient(ellipse at 88% 10%, #10251d 0%, transparent 52%),
+    var(--ink);
+}
+
+.s12__body {
+  position: absolute;
+  inset: 0;
+}
+
+/* --- Header --------------------------------------------------------- */
+.s12__head {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1560px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  transition: all 0.8s var(--ease-out);
+}
+
+.s12__h2 {
+  margin: 22px 0 0;
+  font-size: 104px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.s12__head.is-docked {
+  width: 1160px;
+  left: 96px;
+  top: 66px;
+  transform: none;
+  text-align: left;
+}
+
+.s12__head.is-docked .s12__h2 {
+  margin-top: 14px;
+  font-size: 54px;
+}
+
+/* --- Columns -------------------------------------------------------- */
+.s12__cols {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 206px;
+  height: 686px;
+  display: grid;
+  grid-template-columns: 1fr 168px 1fr;
+  align-items: start;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+
+.s12__cols.is-on {
+  opacity: 1;
+}
+
+.s12__col {
+  position: relative;
+  height: 100%;
+  padding: 26px 32px 30px;
+  border-radius: 26px;
+  border: 1px solid rgba(247, 243, 234, 0.09);
+  display: flex;
+  flex-direction: column;
+}
+
+.s12__col--bad {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 92, 92, 0.09),
+    rgba(255, 92, 92, 0.02)
+  );
+  border-color: rgba(255, 92, 92, 0.3);
+}
+
+.s12__col--good {
+  background: linear-gradient(
+    180deg,
+    rgba(86, 211, 138, 0.09),
+    rgba(86, 211, 138, 0.02)
+  );
+  border-color: rgba(86, 211, 138, 0.32);
+}
+
+.s12__col-tag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 22px;
+}
+
+.s12__col--bad .s12__col-tag {
+  color: var(--red);
+}
+.s12__col--good .s12__col-tag {
+  color: var(--green);
+}
+
+.s12__x,
+.s12__check {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 24px;
+}
+
+.s12__x {
+  background: rgba(255, 92, 92, 0.16);
+}
+.s12__check {
+  background: rgba(86, 211, 138, 0.16);
+}
+
+/* --- Chat ------------------------------------------------------------ */
+.s12__chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.s12__bubble {
+  max-width: 92%;
+  padding: 18px 26px;
+  border-radius: 22px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.s12__bubble--me {
+  border-bottom-right-radius: 6px;
+  background: rgba(247, 243, 234, 0.1);
+  color: var(--paper);
+}
+
+.s12__bubble--angry {
+  background: rgba(255, 92, 92, 0.2);
+  border: 1px solid rgba(255, 92, 92, 0.4);
+}
+
+.s12__bubble--angry.on {
+  animation: s12-shake 0.42s var(--ease) 1;
+}
+
+@keyframes s12-shake {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -1.6deg;
+  }
+  60% {
+    rotate: 1.4deg;
+  }
+}
+
+.s12__bubble--ai {
+  align-self: flex-start;
+  border-radius: 22px;
+  border-bottom-left-radius: 6px;
+  background: rgba(247, 243, 234, 0.07);
+  border: 1px solid rgba(247, 243, 234, 0.12);
+  color: var(--muted);
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.s12__bubble--ghost {
+  background: rgba(247, 243, 234, 0.05);
+  color: var(--faint);
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 92, 92, 0.8);
+  text-decoration-thickness: 3px;
+  font-size: 28px;
+}
+
+.s12__morph {
+  align-self: flex-end;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--green);
+}
+
+.s12__bubble--spec {
+  background: rgba(86, 211, 138, 0.16);
+  border: 1px solid rgba(86, 211, 138, 0.45);
+  padding: 22px 30px;
+}
+
+.s12__bubble--spec ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s12__bubble--spec li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 30px;
+  line-height: 1.6;
+}
+
+.s12__bubble--spec li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 20px;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--green);
+}
+
+.s12__bubble--spec li:last-child {
+  color: var(--amber);
+}
+
+.s12__bubble--spec li:last-child::before {
+  background: var(--amber);
+}
+
+/* --- Outcome strip ---------------------------------------------------- */
+.s12__result {
+  margin-top: 20px;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.s12__result--bad {
+  background: rgba(255, 92, 92, 0.14);
+  color: #ff8f8f;
+}
+
+.s12__result--good {
+  background: rgba(86, 211, 138, 0.14);
+  color: #86e5ac;
+}
+
+/* --- Gutter ----------------------------------------------------------- */
+.s12__gutter {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+
+.s12__gutter.is-on {
+  opacity: 1;
+}
+
+.s12__gutter-line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 181, 71, 0.5),
+    transparent
+  );
+}
+
+.s12__gutter-chip {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 181, 71, 0.55);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  color: var(--amber);
+  white-space: nowrap;
+}
+
+/* --- Anatomy ---------------------------------------------------------- */
+.s12__anatomy {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 915px;
+  display: flex;
+  gap: 22px;
+}
+
+.s12__anat {
+  flex: 1;
+  padding: 16px 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 181, 71, 0.34);
+  background: rgba(255, 181, 71, 0.08);
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+}
+
+.s12__anat-label {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--amber);
+  white-space: nowrap;
+}
+
+.s12__anat-eg {
+  margin: 0;
+  font-size: 26px;
+  color: var(--muted);
+}
+
+/* --- Finale ------------------------------------------------------------ */
+.s12__finale {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+.s12__finale.is-on {
+  opacity: 1;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8, 7, 11, 0.95) 40%,
+    rgba(8, 7, 11, 0.84)
+  );
+}
+
+.s12__finale-text {
+  margin: 0;
+  font-size: 140px;
+  font-weight: 900;
+  line-height: 1.16;
+  text-align: center;
+}

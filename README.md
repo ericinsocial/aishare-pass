@@ -42,13 +42,17 @@ npm run preview    # 預覽 build 結果
 | 05 | Prompt 五大元素 | 8 | `#/presenter/05/0` |
 | 06 | Conversation | 8 | `#/presenter/06/0` |
 | 08 | IDEA → REALITY | 7 | `#/presenter/08/0` |
+| 09 | 主題揭露：會抓老鼠就是好貓 | 6 | `#/presenter/09/0` |
+| 10 | AI 工作流程 | 5 | `#/presenter/10/0` |
+| 11 | REAL WORK | 5 | `#/presenter/11/0` |
+| 12 | 罵得有規格 | 6 | `#/presenter/12/0` |
 | 14 | DONE ≠ RIGHT | 9 | `#/presenter/14/0` |
 | 15 | 方法論 recap | 8 | `#/presenter/15/0` |
 | 16 | Showtime 轉場 | 4 | `#/presenter/16/0` |
 | 17 | AI Production Room | 1 | `#/presenter/17/0` |
 | 18 | Premiere | 5 | `#/presenter/18/0` |
 
-Scene 07 與 Scene 09–13 沒有排進 deck，編號刻意不補。
+Scene 07 與 Scene 13 沒有排進 deck，編號刻意不補。
 
 ### Scene 01 beat 對照
 
@@ -94,6 +98,19 @@ src/
 ```
 
 Scene 圖片直接引用 repo 根目錄的原圖，未經修改
+
+## Scene 09–12
+
+- Scene09 使用根目錄的 `09.png` 作為主視覺。
+- Scene11 會用 `import.meta.glob` 自動掃描根目錄所有 `cibar-*` 圖片組成展示牆；
+  新增圖片只要放進根目錄就會出現，標題可在 `Scene11.tsx` 的 `CAPTIONS` 補上。
+  沒有實際截圖的項目（公司網站／CRM／活動管理）一律以文字 UI card 呈現並標記
+  「文字示意」，不生成假截圖。
+- 這四個 scene 的色票與進場動畫放在 `src/styles/scenes0912.css`，
+  scope 在 `.deck0912` 之下。這裡的 `--ink` 指的是深色底，
+  和 `global.css` 中代表淺色字的 `--ink` 意義相反，所以刻意不掛在 `:root`。
+- 進場動畫用 `src/components/Rise.tsx`（可指定標籤、可疊加 modifier），
+  與共用的 `Reveal` 並存。
 
 ## Scene 17 / 18：mock → Live Session 的替換點
 
