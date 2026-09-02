@@ -1,0 +1,287 @@
+/* ===================== Scene 01 — Strawberry ========================== */
+
+.s01__opening {
+  position: absolute;
+  inset: 0;
+}
+
+.s01__opening > .reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 160px;
+}
+
+.s01__test {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 52px;
+  padding: 96px 128px;
+}
+
+.s01__era {
+  position: absolute;
+  top: 84px;
+  left: 128px;
+  font-family: var(--font-latin);
+  font-size: 92px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+.s01__word {
+  display: flex;
+  gap: 6px;
+  font-family: var(--font-latin);
+  font-size: 176px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.s01__letter {
+  display: inline-block;
+  color: rgba(247, 244, 240, 0.88);
+  text-shadow: none;
+  transform: none;
+  transition:
+    color 420ms var(--ease-stage),
+    text-shadow 420ms var(--ease-stage),
+    transform 420ms var(--ease-stage);
+}
+
+.s01__letter.is-lit {
+  color: var(--accent);
+  text-shadow:
+    0 0 48px rgba(255, 47, 77, 0.85),
+    0 0 140px rgba(255, 47, 77, 0.45);
+  transform: translateY(-14px) scale(1.06);
+}
+
+.s01__answer {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 56px 32px;
+  border-radius: 28px;
+  background: rgba(12, 12, 20, 0.82);
+  border: 2px solid rgba(74, 217, 255, 0.35);
+  box-shadow: 0 0 90px rgba(74, 217, 255, 0.16);
+}
+
+.s01__answer-tag {
+  font-family: var(--font-latin);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: var(--accent-cool);
+}
+
+.s01__answer-text {
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ===================== Scene 02 — Capability timeline ================= */
+
+.s02 {
+  position: absolute;
+  inset: 0;
+}
+
+.s02__opening {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.s02__opening .eyebrow {
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.s02__title {
+  font-family: var(--font-latin);
+  font-size: 172px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.s02__head {
+  position: absolute;
+  top: 88px;
+  left: 128px;
+}
+
+.s02__track {
+  position: absolute;
+  left: 128px;
+  right: 128px;
+  top: 470px;
+  height: 6px;
+  background: rgba(247, 244, 240, 0.14);
+  border-radius: 999px;
+}
+
+.s02__track-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 176, 32, 0.5), var(--accent-warm));
+  box-shadow: 0 0 40px rgba(255, 176, 32, 0.45);
+  transition: width 780ms var(--ease-stage);
+}
+
+.s02__nodes {
+  position: absolute;
+  left: 128px;
+  right: 128px;
+  top: 296px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.s02__node {
+  width: 500px;
+}
+
+.s02__node:nth-child(2) {
+  text-align: center;
+}
+
+.s02__node:last-child {
+  text-align: right;
+}
+
+.s02__year {
+  font-family: var(--font-latin);
+  font-size: 82px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  margin: 0 0 172px;
+}
+
+.s02__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.s02__items li {
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.s02__conclusion {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  padding: 0 140px;
+}
+
+/* ===================== Scene 03 — When AI fails ======================= */
+
+.s03__block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 56px;
+  padding: 96px 140px;
+}
+
+/* Two opening lines share one slot so neither is pushed off centre. */
+.s03__swap {
+  position: absolute;
+  inset: 0;
+}
+
+.s03__swap > .reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 96px 140px;
+}
+
+.s03__quote {
+  color: var(--accent-warm);
+}
+
+.s03__rule {
+  width: 220px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+/* ===================== Scene 04 — Prompt archaeology ================== */
+
+.s04__block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  padding: 96px 140px;
+}
+
+.s04__spells {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 1560px;
+}
+
+.s04__spell {
+  padding: 24px 40px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 176, 32, 0.4);
+  background: rgba(24, 18, 8, 0.7);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--accent-warm);
+  transition:
+    color 520ms var(--ease-stage),
+    border-color 520ms var(--ease-stage),
+    opacity 520ms var(--ease-stage),
+    filter 520ms var(--ease-stage);
+}
+
+.s04__spell.is-dead {
+  color: rgba(247, 244, 240, 0.4);
+  border-color: rgba(247, 244, 240, 0.14);
+  background: rgba(10, 10, 16, 0.7);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 5px;
+}

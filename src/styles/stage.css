@@ -1,0 +1,203 @@
+/* 16:9 presentation viewport — the whole deck lives inside one scaled box. */
+
+.stage-viewport {
+  position: fixed;
+  inset: 0;
+  display: block;
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--stage-width);
+  height: var(--stage-height);
+  transform-origin: 50% 50%;
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* --- backdrop --------------------------------------------------------- */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transform: scale(1.06);
+  transition:
+    opacity 900ms var(--ease-stage),
+    transform 1400ms var(--ease-stage);
+}
+
+.backdrop.is-on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--backdrop-veil, rgba(5, 5, 10, 0.55));
+  transition: background 900ms var(--ease-stage);
+}
+
+/* --- scene layer ------------------------------------------------------ */
+
+.scene-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 96px 128px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- reveal ----------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  filter: blur(14px);
+  transition:
+    opacity var(--beat-duration) var(--ease-stage),
+    transform var(--beat-duration) var(--ease-stage),
+    filter var(--beat-duration) var(--ease-stage);
+  transition-delay: 0ms;
+}
+
+.reveal.is-on {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal[data-from='up'] {
+  transform: translateY(48px);
+}
+
+.reveal[data-from='down'] {
+  transform: translateY(-48px);
+}
+
+.reveal[data-from='left'] {
+  transform: translateX(-56px);
+}
+
+.reveal[data-from='scale'] {
+  transform: scale(0.94);
+}
+
+.reveal[data-from='none'] {
+  transform: none;
+}
+
+/* --- presenter chrome ------------------------------------------------- */
+/* Deliberately not a navbar: a low-contrast beat readout for the speaker. */
+
+.presenter-chrome {
+  position: absolute;
+  z-index: 3;
+  right: 64px;
+  bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  pointer-events: none;
+  font-family: var(--font-latin);
+  letter-spacing: 0.24em;
+  font-size: 20px;
+  color: var(--ink-faint);
+}
+
+.presenter-chrome__beats {
+  display: flex;
+  gap: 10px;
+}
+
+.presenter-chrome__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(247, 244, 240, 0.18);
+  transition: background 300ms var(--ease-stage), transform 300ms var(--ease-stage);
+}
+
+.presenter-chrome__dot.is-done {
+  background: rgba(247, 244, 240, 0.42);
+}
+
+.presenter-chrome__dot.is-current {
+  background: var(--accent);
+  transform: scale(1.5);
+}
+
+/* --- shared scene typography ------------------------------------------ */
+
+/* Scene label pinned to the top-left corner, stable across beats. */
+.eyebrow-anchor {
+  position: absolute;
+  top: 88px;
+  left: 140px;
+}
+
+.eyebrow {
+  font-family: var(--font-latin);
+  font-size: 28px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.line-xl {
+  font-size: 148px;
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.line-lg {
+  font-size: 104px;
+  line-height: 1.14;
+  font-weight: 800;
+  margin: 0;
+}
+
+.line-md {
+  font-size: 64px;
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 0;
+}
+
+.line-sm {
+  font-size: 42px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.hot {
+  color: var(--accent);
+}
+
+.hot-warm {
+  color: var(--accent-warm);
+}
+
+.hot-cool {
+  color: var(--accent-cool);
+}
