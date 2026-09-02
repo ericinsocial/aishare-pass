@@ -1,0 +1,213 @@
+/* ---------------------------------------------------------------
+   Stage design system — 16:9, 1920x1080 design canvas.
+   Palette taken from the Scene09 key visual: warm amber + neon cyan
+   on a deep charcoal ground.
+   --------------------------------------------------------------- */
+:root {
+  --ink: #08070b;
+  --ink-2: #100d16;
+  --paper: #f7f3ea;
+  --muted: rgba(247, 243, 234, 0.58);
+  --faint: rgba(247, 243, 234, 0.28);
+
+  --amber: #ffb547;
+  --amber-deep: #ff8a3d;
+  --cyan: #4fd8ff;
+  --cyan-deep: #17a9db;
+  --red: #ff5c5c;
+  --green: #56d38a;
+
+  --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --font: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei",
+    "Hiragino Sans TC", "Heiti TC", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #000;
+  color: var(--paper);
+  font-family: var(--font);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Stage fitting ------------------------------------------------ */
+.stage-fit {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Centred with translate(-50%,-50%) rather than flex/grid centring: an item
+   wider than its container gets clamped to the start by safe alignment,
+   which shifted the canvas off-screen. */
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--ink);
+  transform-origin: center center;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* --- Reveal primitives -------------------------------------------- */
+.rise {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.6s var(--ease) var(--d, 0ms),
+    transform 0.7s var(--ease) var(--d, 0ms),
+    filter 0.6s var(--ease) var(--d, 0ms);
+}
+.rise.on {
+  opacity: 1;
+  transform: none;
+}
+
+.rise--fade {
+  transform: none;
+}
+.rise--left {
+  transform: translateX(-40px);
+}
+.rise--right {
+  transform: translateX(40px);
+}
+.rise--pop {
+  transform: scale(0.86);
+}
+.rise--blur {
+  filter: blur(14px);
+}
+.rise.on.rise--blur {
+  filter: none;
+}
+
+/* Dim a whole layer when the scene moves on to its punch line. */
+.dimmed {
+  opacity: 0.14;
+  filter: saturate(0.4);
+  transition:
+    opacity 0.7s var(--ease),
+    filter 0.7s var(--ease);
+}
+
+/* --- Type scale ---------------------------------------------------- */
+.kicker {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  color: var(--amber);
+  text-transform: uppercase;
+}
+
+.punch {
+  font-size: 108px;
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: 0.01em;
+}
+
+.hl-amber {
+  color: var(--amber);
+}
+.hl-cyan {
+  color: var(--cyan);
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    radial-gradient(
+      ellipse at 50% 120%,
+      rgba(255, 138, 61, 0.16),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse at 8% -10%,
+      rgba(79, 216, 255, 0.12),
+      transparent 55%
+    );
+}
+
+/* --- Deck chrome ---------------------------------------------------- */
+.deck-nav {
+  position: absolute;
+  left: 64px;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 60;
+  font-size: 15px;
+  color: var(--faint);
+  letter-spacing: 0.2em;
+}
+
+.deck-dots {
+  display: flex;
+  gap: 9px;
+}
+
+.deck-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(247, 243, 234, 0.2);
+  transition:
+    background 0.3s,
+    transform 0.3s;
+}
+.deck-dot.is-current {
+  background: var(--amber);
+  transform: scale(1.35);
+}
+.deck-dot.is-done {
+  background: rgba(255, 181, 71, 0.4);
+}
+
+.deck-hint {
+  position: absolute;
+  right: 64px;
+  bottom: 40px;
+  z-index: 60;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .rise.on {
+    transition-duration: 0.01ms;
+    transform: none;
+    filter: none;
+  }
+  .no-motion-off {
+    animation: none !important;
+  }
+}

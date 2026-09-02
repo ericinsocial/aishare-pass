@@ -1,0 +1,18 @@
+{
+  "name": "aishare",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "vite": "^7.3.6"
+  },
+  "description": "AI 分享會 stage presentation (Scene 09-12)"
+}
