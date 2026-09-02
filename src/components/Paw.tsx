@@ -1,4 +1,9 @@
-export default function Paw({ size = 28, color = 'currentColor', style }) {
+interface PawProps {
+  size?: number
+  color?: string
+}
+
+export default function Paw({ size = 28, color = 'currentColor' }: PawProps) {
   return (
     <svg
       width={size}
@@ -6,7 +11,6 @@ export default function Paw({ size = 28, color = 'currentColor', style }) {
       viewBox="0 0 32 32"
       fill={color}
       aria-hidden="true"
-      style={style}
     >
       <ellipse cx="16" cy="21" rx="8" ry="6.4" />
       <ellipse cx="6.6" cy="13.4" rx="3.5" ry="4.4" />

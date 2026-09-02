@@ -1,9 +1,10 @@
-import Rise from '../components/Rise.jsx'
+import type { SceneProps } from '../types/scene'
+import Rise from '../components/Rise'
 import './Scene11.css'
 
 /* Scan the repo for every cibar-* screenshot. New ones dropped into the
    repo root show up on the wall automatically — no code change needed. */
-const scanned = import.meta.glob('../../cibar-*.{jpg,jpeg,png,webp}', {
+const scanned = import.meta.glob<string>('../../cibar-*.{jpg,jpeg,png,webp}', {
   eager: true,
   query: '?url',
   import: 'default',
@@ -11,7 +12,12 @@ const scanned = import.meta.glob('../../cibar-*.{jpg,jpeg,png,webp}', {
 
 /* Captions for the shots we have. Anything unrecognised still shows up,
    labelled from its filename, rather than being silently dropped. */
-const CAPTIONS = {
+interface Caption {
+  title: string
+  sub: string
+}
+
+const CAPTIONS: Record<string, Caption> = {
   'cibar-home': { title: '體驗首頁', sub: 'AR 詐騙體驗入口' },
   'cibar-ar-scan': { title: 'AR 掃描', sub: '對準可疑物件' },
   'cibar-blackpi-home': { title: '假電商', sub: '黑皮購物情境' },
@@ -33,7 +39,7 @@ const ORDER = [
 
 const SHOTS = Object.entries(scanned)
   .map(([path, src]) => {
-    const key = path.split('/').pop().replace(/\.\w+$/, '')
+    const key = (path.split('/').pop() ?? '').replace(/\.\w+$/, '')
     return { key, src, ...(CAPTIONS[key] ?? { title: key, sub: '' }) }
   })
   .sort((a, b) => {
@@ -59,12 +65,14 @@ const OTHER_WORK = [
   },
 ]
 
-export default function Scene11({ step }) {
-  const docked = step >= 1
-  const finale = step >= 4
+export const SCENE_11_BEATS = 5
+
+export function Scene11({ beat }: SceneProps) {
+  const docked = beat >= 1
+  const finale = beat >= 4
 
   return (
-    <div className="scene s11">
+    <div className="scene deck0912 s11">
       <div className="grain" />
 
       <div className={`s11__body ${finale ? 'dimmed' : ''}`}>
@@ -105,7 +113,7 @@ export default function Scene11({ step }) {
 
         {/* --- Project row --- */}
         <div className="s11__projects">
-          <Rise show={step >= 2} variant="pop" className="s11__proj s11__proj--hero">
+          <Rise show={beat >= 2} variant="pop" className="s11__proj s11__proj--hero">
             <span className="s11__badge s11__badge--real">實際畫面</span>
             <p className="s11__proj-org">內政部警政署刑事警察局</p>
             <p className="s11__proj-title">沉浸式 AR 詐騙體驗</p>
@@ -117,7 +125,7 @@ export default function Scene11({ step }) {
           {OTHER_WORK.map((w, i) => (
             <Rise
               key={w.title}
-              show={step >= 3}
+              show={beat >= 3}
               delay={i * 140}
               variant="pop"
               className="s11__proj"

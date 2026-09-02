@@ -1,5 +1,7 @@
-import Rise from '../components/Rise.jsx'
-import Paw from '../components/Paw.jsx'
+import type { CSSProperties } from 'react'
+import type { SceneProps } from '../types/scene'
+import Rise from '../components/Rise'
+import Paw from '../components/Paw'
 import './Scene10.css'
 
 const HUMAN = [
@@ -17,11 +19,13 @@ const AI_ROLES = [
   { title: '挑錯', desc: '專門找我沒看到的洞', tone: 'e' },
 ]
 
-export default function Scene10({ step }) {
-  const finale = step >= 4
+export const SCENE_10_BEATS = 5
+
+export function Scene10({ beat }: SceneProps) {
+  const finale = beat >= 4
 
   return (
-    <div className="scene s10">
+    <div className="scene deck0912 s10">
       <div className="grain" />
 
       <div className={`s10__body ${finale ? 'dimmed' : ''}`}>
@@ -58,14 +62,14 @@ export default function Scene10({ step }) {
         </section>
 
         {/* --- Dispatch --- */}
-        <div className={`s10__flow s10__flow--down ${step >= 2 ? 'is-on' : ''}`}>
+        <div className={`s10__flow s10__flow--down ${beat >= 2 ? 'is-on' : ''}`}>
           <span className="s10__flow-label">派工</span>
           <div className="s10__rails">
             {AI_ROLES.map((r, i) => (
               <span
                 key={r.title}
                 className="s10__rail"
-                style={{ '--i': i }}
+                style={{ '--i': i } as CSSProperties}
               />
             ))}
           </div>
@@ -73,7 +77,7 @@ export default function Scene10({ step }) {
 
         {/* --- AI band --- */}
         <section className="s10__band s10__band--ai">
-          <Rise show={step >= 1} variant="left" className="s10__band-label">
+          <Rise show={beat >= 1} variant="left" className="s10__band-label">
             <span className="s10__band-tag s10__band-tag--ai">AI Team</span>
             <span className="s10__band-note">一隻貓，抓一種老鼠</span>
           </Rise>
@@ -82,7 +86,7 @@ export default function Scene10({ step }) {
             {AI_ROLES.map((r, i) => (
               <Rise
                 key={r.title}
-                show={step >= 1}
+                show={beat >= 1}
                 delay={i * 110}
                 variant="pop"
                 className={`s10__card s10__card--ai tone-${r.tone}`}
@@ -98,7 +102,7 @@ export default function Scene10({ step }) {
         </section>
 
         {/* --- Return + reject loop --- */}
-        <Rise show={step >= 3} className="s10__return">
+        <Rise show={beat >= 3} className="s10__return">
           <span className="s10__return-arrow" />
           <span className="s10__return-text">
             交回 → 人驗收

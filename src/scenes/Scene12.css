@@ -47,7 +47,7 @@
   left: 96px;
   right: 96px;
   top: 206px;
-  height: 706px;
+  height: 686px;
   display: grid;
   grid-template-columns: 1fr 168px 1fr;
   align-items: start;
@@ -295,7 +295,7 @@
   position: absolute;
   left: 96px;
   right: 96px;
-  top: 936px;
+  top: 915px;
   display: flex;
   gap: 22px;
 }

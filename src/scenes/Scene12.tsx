@@ -1,4 +1,5 @@
-import Rise from '../components/Rise.jsx'
+import type { SceneProps } from '../types/scene'
+import Rise from '../components/Rise'
 import './Scene12.css'
 
 const VAGUE = ['這什麼鬼', '不好看', '不對', '再改']
@@ -11,12 +12,14 @@ const ANATOMY = [
   { label: '要改成什麼', example: '放大兩倍' },
 ]
 
-export default function Scene12({ step }) {
-  const docked = step >= 1
-  const finale = step >= 5
+export const SCENE_12_BEATS = 6
+
+export function Scene12({ beat }: SceneProps) {
+  const docked = beat >= 1
+  const finale = beat >= 5
 
   return (
-    <div className="scene s12">
+    <div className="scene deck0912 s12">
       <div className="grain" />
 
       <div className={`s12__body ${finale ? 'dimmed' : ''}`}>
@@ -32,7 +35,7 @@ export default function Scene12({ step }) {
         <div className={`s12__cols ${docked ? 'is-on' : ''}`}>
           {/* --- BEFORE --- */}
           <section className="s12__col s12__col--bad">
-            <Rise show={step >= 1} className="s12__col-tag">
+            <Rise show={beat >= 1} className="s12__col-tag">
               <span className="s12__x">✕</span> 沒有規格的罵
             </Rise>
 
@@ -40,7 +43,7 @@ export default function Scene12({ step }) {
               {VAGUE.map((t, i) => (
                 <Rise
                   key={t}
-                  show={step >= 1}
+                  show={beat >= 1}
                   delay={i * 260}
                   variant="pop"
                   className="s12__bubble s12__bubble--me s12__bubble--angry"
@@ -50,7 +53,7 @@ export default function Scene12({ step }) {
               ))}
 
               <Rise
-                show={step >= 2}
+                show={beat >= 2}
                 variant="pop"
                 className="s12__bubble s12__bubble--ai"
               >
@@ -58,13 +61,13 @@ export default function Scene12({ step }) {
               </Rise>
             </div>
 
-            <Rise show={step >= 2} delay={300} className="s12__result s12__result--bad">
+            <Rise show={beat >= 2} delay={300} className="s12__result s12__result--bad">
               動到不該動的地方 → 越改越爛
             </Rise>
           </section>
 
           {/* --- transform --- */}
-          <div className={`s12__gutter ${step >= 3 ? 'is-on' : ''}`}>
+          <div className={`s12__gutter ${beat >= 3 ? 'is-on' : ''}`}>
             <span className="s12__gutter-line" />
             <span className="s12__gutter-chip">升級</span>
             <span className="s12__gutter-line" />
@@ -72,25 +75,25 @@ export default function Scene12({ step }) {
 
           {/* --- AFTER --- */}
           <section className="s12__col s12__col--good">
-            <Rise show={step >= 3} className="s12__col-tag">
+            <Rise show={beat >= 3} className="s12__col-tag">
               <span className="s12__check">✓</span> 有規格的罵
             </Rise>
 
             <div className="s12__chat">
               <Rise
-                show={step >= 3}
+                show={beat >= 3}
                 variant="pop"
                 className="s12__bubble s12__bubble--me s12__bubble--ghost"
               >
                 這什麼鬼
               </Rise>
 
-              <Rise show={step >= 3} delay={200} className="s12__morph">
+              <Rise show={beat >= 3} delay={200} className="s12__morph">
                 ↓ 同一句話，講成規格
               </Rise>
 
               <Rise
-                show={step >= 3}
+                show={beat >= 3}
                 delay={340}
                 variant="pop"
                 className="s12__bubble s12__bubble--me s12__bubble--spec"
@@ -103,7 +106,7 @@ export default function Scene12({ step }) {
               </Rise>
 
               <Rise
-                show={step >= 3}
+                show={beat >= 3}
                 delay={760}
                 variant="pop"
                 className="s12__bubble s12__bubble--ai"
@@ -113,7 +116,7 @@ export default function Scene12({ step }) {
             </div>
 
             <Rise
-              show={step >= 3}
+              show={beat >= 3}
               delay={980}
               className="s12__result s12__result--good"
             >
@@ -127,7 +130,7 @@ export default function Scene12({ step }) {
           {ANATOMY.map((a, i) => (
             <Rise
               key={a.label}
-              show={step >= 4}
+              show={beat >= 4}
               delay={i * 180}
               variant="pop"
               className="s12__anat"

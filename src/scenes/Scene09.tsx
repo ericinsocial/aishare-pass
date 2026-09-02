@@ -1,5 +1,6 @@
-import Rise from '../components/Rise.jsx'
-import Paw from '../components/Paw.jsx'
+import type { SceneProps } from '../types/scene'
+import Rise from '../components/Rise'
+import Paw from '../components/Paw'
 import keyVisual from '../../09.png'
 import './Scene09.css'
 
@@ -11,14 +12,16 @@ const ROUTES = [
   { mouse: '做圖的老鼠', cat: 'cat--white' },
 ]
 
-export default function Scene09({ step }) {
-  const docked = step >= 2
-  const finale = step >= 5
+export const SCENE_09_BEATS = 6
+
+export function Scene09({ beat }: SceneProps) {
+  const docked = beat >= 2
+  const finale = beat >= 5
 
   return (
-    <div className="scene s9">
+    <div className="scene deck0912 s9">
       <div
-        className={`s9__visual ${step >= 1 ? 'is-scrimmed' : ''} ${
+        className={`s9__visual ${beat >= 1 ? 'is-scrimmed' : ''} ${
           finale ? 'is-finale' : ''
         }`}
       >
@@ -27,26 +30,26 @@ export default function Scene09({ step }) {
       </div>
 
       <div className={`s9__body ${finale ? 'dimmed' : ''}`}>
-        {/* Title — centre stage at step 1, docked top-left from step 2 on. */}
+        {/* Title — centre stage at beat 1, docked top-left from beat 2 on. */}
         <div className={`s9__title ${docked ? 'is-docked' : ''}`}>
-          <Rise show={step >= 1} as="h1" className="s9__h1">
+          <Rise show={beat >= 1} as="h1" className="s9__h1">
             <span>《黑貓、白貓、AI 貓：</span>
             <span>會抓老鼠就是好貓》</span>
           </Rise>
-          <Rise show={step >= 1} delay={220} as="p" className="s9__sub">
+          <Rise show={beat >= 1} delay={220} as="p" className="s9__sub">
             <span>AI 時代，從「我會不會」</span>
             <span>到「我做不做得出來」</span>
           </Rise>
         </div>
 
         <div className="s9__lines">
-          <Rise show={step >= 2} variant="left" className="s9__line s9__line--no">
+          <Rise show={beat >= 2} variant="left" className="s9__line s9__line--no">
             <span className="s9__mark">✕</span>
             <span>我不是在找一個什麼都會的 AI</span>
           </Rise>
 
           <Rise
-            show={step >= 3}
+            show={beat >= 3}
             variant="left"
             className="s9__line s9__line--yes"
           >
@@ -59,7 +62,7 @@ export default function Scene09({ step }) {
           </Rise>
 
           <Rise
-            show={step >= 4}
+            show={beat >= 4}
             variant="left"
             className="s9__line s9__line--yes"
           >
@@ -73,7 +76,7 @@ export default function Scene09({ step }) {
             {ROUTES.map((r, i) => (
               <Rise
                 key={r.mouse}
-                show={step >= 4}
+                show={beat >= 4}
                 delay={320 + i * 160}
                 variant="left"
                 className="s9__route"
