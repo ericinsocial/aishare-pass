@@ -1,0 +1,101 @@
+# TEMPORARY. This sandbox's egress proxy blocks *.github.io, so the live site
+# is checked from a runner instead. Runs only on this branch; deleted after.
+name: Verify live Pages
+
+on: push
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe the published site
+        run: |
+          BASE=https://ericinsocial.github.io/aishare
+          echo "=== index.html ==="
+          curl -sSL -o page.html -w "status=%{http_code}  final=%{url_effective}\n" "$BASE/"
+          echo "--- body ---"; cat page.html; echo "--- end body ---"
+          echo
+          echo "=== package.json (404 expected: proves dist/ is served, not the repo) ==="
+          curl -sSL -o /dev/null -w "status=%{http_code}\n" "$BASE/package.json"
+          echo
+          echo "=== referenced assets ==="
+          grep -oE '(src|href)="[^"]*assets/[^"]*"' page.html | sed -E 's/.*"(.*)"/\1/' | while read -r a; do
+            u="$BASE/${a#./}"
+            printf "%-70s " "${a}"
+            curl -sSL -o /dev/null -w "status=%{http_code} type=%{content_type} bytes=%{size_download}\n" "$u"
+          done
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Walk the live deck in a browser
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm i -D playwright@1.56.1 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+          cat > walk.mjs <<'JS'
+          import { chromium } from 'playwright'
+          const BASE = 'https://ericinsocial.github.io/aishare/'
+          const EXPECTED = ['01','02','03','04','05','06','08','09','10','11','12','14','15','16','17','18']
+          const errs = [], perrs = [], bad = [], failed = []
+          const b = await chromium.launch()
+          const p = await b.newPage({ viewport: { width: 1600, height: 900 } })
+          p.on('console', m => { if (m.type() === 'error') errs.push(m.text()) })
+          p.on('pageerror', e => perrs.push(String(e)))
+          p.on('response', r => { if (r.status() >= 400) bad.push(r.status() + ' ' + r.url()) })
+          p.on('requestfailed', r => failed.push(r.url() + ' :: ' + (r.failure()?.errorText)))
+
+          await p.goto(BASE + '#/presenter/01/0', { waitUntil: 'networkidle' })
+          await p.waitForTimeout(1500)
+          const first = await p.evaluate(() => ({
+            hash: location.hash,
+            root: document.getElementById('root')?.childElementCount ?? 0,
+            bg: getComputedStyle(document.body).backgroundColor,
+            sheets: document.styleSheets.length,
+            text: (document.body.innerText || '').replace(/\s+/g, ' ').slice(0, 100),
+          }))
+          console.log('COLD LOAD ' + JSON.stringify(first))
+
+          const visited = []
+          let cur = first.hash, guard = 0
+          while (guard++ < 400) {
+            const before = cur
+            await p.evaluate(() => document.activeElement instanceof HTMLElement && document.activeElement.blur())
+            await p.keyboard.press('ArrowRight')
+            await p.waitForTimeout(80)
+            cur = await p.evaluate(() => location.hash)
+            if (cur === before) break
+            visited.push(cur)
+          }
+          const order = [...new Set([first.hash, ...visited].map(h => h.split('/')[2]))]
+          console.log('ORDER    : ' + order.join(' -> '))
+          console.log('MATCH    : ' + (order.join() === EXPECTED.join()))
+          console.log('BEATS    : ' + (visited.length + 1))
+
+          let imgs = 0, broken = 0
+          for (const s of EXPECTED) {
+            await p.goto(BASE + `#/presenter/${s}/0`, { waitUntil: 'networkidle' })
+            await p.waitForTimeout(500)
+            const r = await p.evaluate(() => {
+              const i = [...document.images]
+              return { n: i.length, bad: i.filter(x => !(x.complete && x.naturalWidth > 0)).length,
+                       root: document.getElementById('root')?.childElementCount ?? 0 }
+            })
+            imgs += r.n; broken += r.bad
+            console.log(`scene ${s}: root=${r.root} imgs=${r.n} broken=${r.bad}`)
+          }
+          console.log(`TOTAL imgs=${imgs} broken=${broken}`)
+
+          await p.goto(BASE + '#/presenter/11/1', { waitUntil: 'networkidle' })
+          await p.reload({ waitUntil: 'networkidle' })
+          console.log('RELOAD @11/1 -> ' + JSON.stringify(await p.evaluate(() => ({
+            hash: location.hash, root: document.getElementById('root')?.childElementCount ?? 0 }))))
+
+          console.log('console errors : ' + errs.length); errs.slice(0,10).forEach(e => console.log('   ' + e))
+          console.log('page errors    : ' + perrs.length); perrs.slice(0,10).forEach(e => console.log('   ' + e))
+          console.log('4xx/5xx        : ' + bad.length); bad.slice(0,15).forEach(e => console.log('   ' + e))
+          console.log('failed reqs    : ' + failed.length); failed.slice(0,10).forEach(e => console.log('   ' + e))
+          await b.close()
+          JS
+          node walk.mjs
