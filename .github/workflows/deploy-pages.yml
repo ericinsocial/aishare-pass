@@ -25,17 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # enablement: true flips the repository's Pages source to "GitHub
-      # Actions" on the first run, so no manual settings step is needed.
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
