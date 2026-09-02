@@ -76,13 +76,14 @@
 /* Two columns so the first half lands on one press and the rest on the
    next, while the box never reflows: hidden lines still hold their slot. */
 .s12__lines {
-  /* column-fill: auto with a fixed height makes the split deterministic:
-     the first eight lines are column one, the rest column two, which is
-     exactly how the two presses are meant to land. */
-  columns: 2;
-  column-gap: 22px;
-  column-fill: auto;
-  height: 524px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.s12__col {
+  min-width: 0;
 }
 
 .s12__line {
@@ -99,7 +100,6 @@
   line-height: 1.34;
   color: var(--paper);
   overflow-wrap: anywhere;
-  break-inside: avoid;
 }
 
 /* The question-mark lines are not a sentence — they are the sound of me

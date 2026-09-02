@@ -76,17 +76,26 @@ export function Scene12({ beat }: SceneProps) {
               隨便截一段，我自己講出去的話
             </Rise>
 
+            {/* Two real columns, not a CSS multi-column: the reveal is gated
+                by count, so the split has to be by count too. Balancing on
+                height would move line 8 across the moment a bubble wraps on
+                a projector with a different font fallback, and it would then
+                appear on the first press above lines still hidden. */}
             <div className="s12__lines">
-              {LOG.map((line, i) => (
-                <Rise
-                  key={line.text}
-                  show={beat >= (i < HALF ? 1 : SECOND_HALF)}
-                  delay={(i % HALF) * 90}
-                  variant="right"
-                  className={`s12__line${line.tone ? ` is-${line.tone}` : ''}`}
-                >
-                  {line.text}
-                </Rise>
+              {[0, 1].map((col) => (
+                <div className="s12__col" key={col}>
+                  {LOG.slice(col * HALF, col * HALF + HALF).map((line, i) => (
+                    <Rise
+                      key={line.text}
+                      show={beat >= (col === 0 ? 1 : SECOND_HALF)}
+                      delay={i * 90}
+                      variant="right"
+                      className={`s12__line${line.tone ? ` is-${line.tone}` : ''}`}
+                    >
+                      {line.text}
+                    </Rise>
+                  ))}
+                </div>
               ))}
             </div>
 

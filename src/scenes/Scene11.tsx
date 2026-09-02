@@ -37,10 +37,13 @@ const ORDER = [
   'cibar-investment-video',
 ]
 
+/* A screenshot with no caption still goes on the wall — but it is labelled
+   by its position, never by its filename. The files are called cibar-*, and
+   the one project name the audience is ever shown is 刑事警察局反詐 AR APP. */
 const SHOTS = Object.entries(scanned)
-  .map(([path, src]) => {
+  .map(([path, src], i) => {
     const key = (path.split('/').pop() ?? '').replace(/\.\w+$/, '')
-    return { key, src, ...(CAPTIONS[key] ?? { title: key, sub: '' }) }
+    return { key, src, ...(CAPTIONS[key] ?? { title: `情境模組 ${i + 1}`, sub: '' }) }
   })
   .sort((a, b) => {
     const ia = ORDER.indexOf(a.key)
@@ -109,21 +112,6 @@ export function Scene11({ beat }: SceneProps) {
             <p className="s11__proj-meta">
               {SHOTS.length} 個情境模組 · AR 辨識 · AI 影片 · 互動流程
             </p>
-            {/* The modules are the ones already captioned on the wall above,
-                so the card names what is on screen instead of restating it. */}
-            <div className="s11__skills">
-              {SHOTS.map((shot, i) => (
-                <Rise
-                  key={shot.key}
-                  show={beat >= 2}
-                  delay={200 + i * 70}
-                  variant="pop"
-                  className="s11__skill"
-                >
-                  {shot.title}
-                </Rise>
-              ))}
-            </div>
           </Rise>
 
           <Rise
