@@ -2,6 +2,31 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // GitHub Pages replaces every hashed asset on each deploy but serves
+      // index.html with a ten-minute cache. A browser still holding the
+      // previous index.html then asks for a bundle that no longer exists,
+      // nothing mounts, and the deck goes black — mid-talk, with no way back
+      // but a hard refresh the presenter should never have to think about.
+      // Catch that one case and re-fetch the page past the cache, keeping the
+      // beat in the hash so the presenter lands exactly where they were.
+      ;(function () {
+        var recovering = false
+        window.addEventListener(
+          'error',
+          function (event) {
+            var el = event.target
+            if (!el || (el.tagName !== 'SCRIPT' && el.tagName !== 'LINK')) return
+            // Retry once only: ?v= already present means the fresh copy failed
+            // too, and a reload loop would be worse than a blank slide.
+            if (recovering || /[?&]v=/.test(location.search)) return
+            recovering = true
+            location.replace(location.pathname + '?v=' + Date.now() + location.hash)
+          },
+          true, // resource errors do not bubble; only capture sees them
+        )
+      })()
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
     <link

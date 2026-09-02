@@ -18,6 +18,19 @@ npm run preview    # 預覽 build 結果
 
 `vite.config.ts` 使用 `base: './'` 搭配 hash routing，`dist/` 可直接放上 GitHub Pages
 
+### 部署後畫面全黑的自動復原
+
+GitHub Pages 每次部署都會換掉所有帶 hash 的檔名（`index-XXXX.js`），舊檔案立刻從
+伺服器上消失，但 `index.html` 本身帶著約 10 分鐘的快取。所以剛部署完的那幾分鐘，
+瀏覽器可能拿著**舊的 `index.html`** 去要一個**已經不存在的 bundle** —— JS 404、
+React 沒掛載、`#root` 是空的，畫面就是**全黑**，而且看起來像整個網站掛掉。
+
+`index.html` 最上面那段 inline script 就是在擋這件事：偵測到 script／link 載入失敗
+時，用 `?v=<timestamp>` 重新抓一次頁面繞過快取。只重試一次（避免無限 reload），
+並且保留 hash 裡的 scene/beat，所以就算講到一半才觸發，也會回到原本那一頁。
+
+投影前如果真的遇到空白，手動解法是 `Ctrl/Cmd + Shift + R` 強制重整。
+
 ## Presenter 操作
 
 網址格式：
