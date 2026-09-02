@@ -97,7 +97,7 @@ export const scenes: Scene[] = [
   },
   {
     slug: '12',
-    title: '罵得有規格',
+    title: '我跟 AI 實際工作的樣子',
     beats: SCENE_12_BEATS,
     view: Scene12,
   },

@@ -41,287 +41,195 @@
   font-size: 54px;
 }
 
-/* --- Columns -------------------------------------------------------- */
-.s12__cols {
+/* --- Work area ------------------------------------------------------- */
+/* Left: what I actually said. Right: what those lines actually are. */
+.s12__work {
   position: absolute;
   left: 96px;
   right: 96px;
-  top: 206px;
-  height: 686px;
+  top: 196px;
+  height: 690px;
   display: grid;
-  grid-template-columns: 1fr 168px 1fr;
+  grid-template-columns: 1fr 470px;
+  gap: 46px;
   align-items: start;
   opacity: 0;
   transition: opacity 0.6s var(--ease);
 }
 
-.s12__cols.is-on {
+.s12__work.is-on {
   opacity: 1;
 }
 
-.s12__col {
-  position: relative;
-  height: 100%;
-  padding: 26px 32px 30px;
-  border-radius: 26px;
-  border: 1px solid rgba(247, 243, 234, 0.09);
-  display: flex;
-  flex-direction: column;
+/* --- The log --------------------------------------------------------- */
+.s12__log {
+  min-width: 0;
 }
 
-.s12__col--bad {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 92, 92, 0.09),
-    rgba(255, 92, 92, 0.02)
-  );
-  border-color: rgba(255, 92, 92, 0.3);
-}
-
-.s12__col--good {
-  background: linear-gradient(
-    180deg,
-    rgba(86, 211, 138, 0.09),
-    rgba(86, 211, 138, 0.02)
-  );
-  border-color: rgba(86, 211, 138, 0.32);
-}
-
-.s12__col-tag {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  margin-bottom: 22px;
-}
-
-.s12__col--bad .s12__col-tag {
-  color: var(--red);
-}
-.s12__col--good .s12__col-tag {
-  color: var(--green);
-}
-
-.s12__x,
-.s12__check {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+.s12__log-head {
+  margin-bottom: 18px;
   font-size: 24px;
+  letter-spacing: 0.16em;
+  color: var(--faint);
 }
 
-.s12__x {
-  background: rgba(255, 92, 92, 0.16);
-}
-.s12__check {
-  background: rgba(86, 211, 138, 0.16);
-}
-
-/* --- Chat ------------------------------------------------------------ */
-.s12__chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
+/* Two columns so the first half lands on one press and the rest on the
+   next, while the box never reflows: hidden lines still hold their slot. */
+.s12__lines {
+  /* column-fill: auto with a fixed height makes the split deterministic:
+     the first eight lines are column one, the rest column two, which is
+     exactly how the two presses are meant to land. */
+  columns: 2;
+  column-gap: 22px;
+  column-fill: auto;
+  height: 524px;
 }
 
-.s12__bubble {
-  max-width: 92%;
-  padding: 18px 26px;
-  border-radius: 22px;
-  font-size: 32px;
+.s12__line {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 9px auto;
+  padding: 10px 20px;
+  border-radius: 18px;
+  border-bottom-right-radius: 5px;
+  background: rgba(255, 92, 92, 0.14);
+  border: 1px solid rgba(255, 92, 92, 0.32);
+  font-size: 24px;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.34;
+  color: var(--paper);
+  overflow-wrap: anywhere;
+  break-inside: avoid;
 }
 
-.s12__bubble--me {
-  border-bottom-right-radius: 6px;
-  background: rgba(247, 243, 234, 0.1);
+/* The question-mark lines are not a sentence — they are the sound of me
+   giving up on words, so they get the loudest treatment on the wall. */
+.s12__line.is-qm {
+  background: rgba(255, 181, 71, 0.16);
+  border-color: rgba(255, 181, 71, 0.5);
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  font-weight: 900;
+}
+
+.s12__line.is-hot {
+  background: rgba(255, 92, 92, 0.24);
+  border-color: rgba(255, 92, 92, 0.6);
+  color: #ffbdbd;
+}
+
+.s12__log-note {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.s12__log-note p {
+  margin: 0;
+  font-size: 27px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.s12__log-note .turn {
+  margin-top: 4px;
+  font-size: 34px;
+  font-weight: 900;
   color: var(--paper);
 }
 
-.s12__bubble--angry {
-  background: rgba(255, 92, 92, 0.2);
-  border: 1px solid rgba(255, 92, 92, 0.4);
-}
-
-.s12__bubble--angry.on {
-  animation: s12-shake 0.42s var(--ease) 1;
-}
-
-@keyframes s12-shake {
-  0%,
-  100% {
-    rotate: 0deg;
-  }
-  25% {
-    rotate: -1.6deg;
-  }
-  60% {
-    rotate: 1.4deg;
-  }
-}
-
-.s12__bubble--ai {
-  align-self: flex-start;
-  border-radius: 22px;
-  border-bottom-left-radius: 6px;
-  background: rgba(247, 243, 234, 0.07);
-  border: 1px solid rgba(247, 243, 234, 0.12);
-  color: var(--muted);
-  font-size: 26px;
-  font-weight: 400;
-}
-
-.s12__bubble--ghost {
-  background: rgba(247, 243, 234, 0.05);
-  color: var(--faint);
-  text-decoration: line-through;
-  text-decoration-color: rgba(255, 92, 92, 0.8);
-  text-decoration-thickness: 3px;
-  font-size: 28px;
-}
-
-.s12__morph {
-  align-self: flex-end;
-  font-size: 22px;
-  letter-spacing: 0.12em;
-  color: var(--green);
-}
-
-.s12__bubble--spec {
-  background: rgba(86, 211, 138, 0.16);
-  border: 1px solid rgba(86, 211, 138, 0.45);
-  padding: 22px 30px;
-}
-
-.s12__bubble--spec ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.s12__bubble--spec li {
-  position: relative;
-  padding-left: 26px;
-  font-size: 30px;
-  line-height: 1.6;
-}
-
-.s12__bubble--spec li::before {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 20px;
-  width: 9px;
-  height: 9px;
-  border-radius: 2px;
-  background: var(--green);
-}
-
-.s12__bubble--spec li:last-child {
-  color: var(--amber);
-}
-
-.s12__bubble--spec li:last-child::before {
-  background: var(--amber);
-}
-
-/* --- Outcome strip ---------------------------------------------------- */
-.s12__result {
-  margin-top: 20px;
-  padding: 14px 24px;
-  border-radius: 14px;
-  font-size: 25px;
-  font-weight: 700;
-  text-align: center;
-}
-
-.s12__result--bad {
-  background: rgba(255, 92, 92, 0.14);
-  color: #ff8f8f;
-}
-
-.s12__result--good {
-  background: rgba(86, 211, 138, 0.14);
-  color: #86e5ac;
-}
-
-/* --- Gutter ----------------------------------------------------------- */
-.s12__gutter {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+/* --- The loop -------------------------------------------------------- */
+/* The panel itself only exists from the beat that fills it — an empty
+   bordered box sitting on stage for two presses reads as a mistake. */
+.s12__loop {
   opacity: 0;
   transition: opacity 0.6s var(--ease);
-}
-
-.s12__gutter.is-on {
-  opacity: 1;
-}
-
-.s12__gutter-line {
-  width: 2px;
-  flex: 1;
+  padding: 26px 30px 24px;
+  border-radius: 26px;
+  border: 1px solid rgba(86, 211, 138, 0.32);
   background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255, 181, 71, 0.5),
-    transparent
+    180deg,
+    rgba(86, 211, 138, 0.1),
+    rgba(86, 211, 138, 0.02)
   );
 }
 
-.s12__gutter-chip {
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 181, 71, 0.55);
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-  color: var(--amber);
-  white-space: nowrap;
+.s12__loop.is-on {
+  opacity: 1;
 }
 
-/* --- Anatomy ---------------------------------------------------------- */
-.s12__anatomy {
+.s12__loop-head {
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--green);
+}
+
+.s12__loop-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.s12__loop-step {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 11px 18px;
+  border-radius: 16px;
+  background: rgba(247, 243, 234, 0.05);
+}
+
+.s12__loop-step .n {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--green);
+}
+
+.s12__loop-step .t {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.s12__loop-back {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+/* --- The useful half of the shouting --------------------------------- */
+.s12__spec {
   position: absolute;
   left: 96px;
   right: 96px;
-  top: 915px;
-  display: flex;
-  gap: 22px;
-}
-
-.s12__anat {
-  flex: 1;
-  padding: 16px 28px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 181, 71, 0.34);
+  top: 912px;
+  padding: 20px 34px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 181, 71, 0.36);
   background: rgba(255, 181, 71, 0.08);
   display: flex;
   align-items: baseline;
-  gap: 22px;
+  gap: 34px;
 }
 
-.s12__anat-label {
+.s12__spec-a {
   margin: 0;
-  font-size: 32px;
+  font-size: 44px;
   font-weight: 900;
-  color: var(--amber);
   white-space: nowrap;
 }
 
-.s12__anat-eg {
+.s12__spec-b {
   margin: 0;
   font-size: 26px;
+  line-height: 1.4;
   color: var(--muted);
 }
 
@@ -330,7 +238,9 @@
   position: absolute;
   inset: 0;
   display: grid;
-  place-items: center;
+  place-content: center;
+  justify-items: center;
+  gap: 18px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s var(--ease);
@@ -345,10 +255,42 @@
   );
 }
 
-.s12__finale-text {
+.s12__finale-a,
+.s12__finale-b {
   margin: 0;
-  font-size: 140px;
-  font-weight: 900;
-  line-height: 1.16;
   text-align: center;
+  line-height: 1.16;
+}
+
+.s12__finale-a {
+  font-size: 66px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.s12__finale-b {
+  font-size: 104px;
+  font-weight: 900;
+}
+
+.s12__finale-rule {
+  width: 260px;
+  height: 2px;
+  margin: 14px 0 6px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 181, 71, 0.8),
+    transparent
+  );
+}
+
+/* The line the whole page exists to hand back to. */
+.s12__finale-punch {
+  margin: 0;
+  font-size: 60px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--amber);
 }

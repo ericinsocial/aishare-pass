@@ -23,7 +23,7 @@ export function Scene15({ beat }: SceneProps) {
   return (
     <Deck1418Frame>
     <section className="scene s15">
-      <div className="scene-kicker">Scene 15 · Recap</div>
+      <div className="scene-kicker">Recap</div>
 
       <h1 className="punch" style={{ fontSize: 46, margin: '22px 0 0' }}>
         整套方法論，就這五個字

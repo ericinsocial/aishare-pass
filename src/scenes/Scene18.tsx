@@ -131,9 +131,6 @@ export function Scene18({ beat }: SceneProps) {
             <span className="chip">首映 · world premiere</span>
           )}
           {state.mock && <span className="chip mock">mock state</span>}
-          <span style={{ marginLeft: 'auto' }} className="scene-kicker">
-            Scene 18
-          </span>
         </div>
 
         <div className="s18-body">
@@ -217,7 +214,7 @@ export function Scene18({ beat }: SceneProps) {
                 <div className="film-title">{state.story?.title ?? '《尚未命名》'}</div>
                 <div className="film-log">
                   {state.story?.logline ??
-                    '回到 Scene 17 跑一次 Live Session，這裡就會長出故事。'}
+                    '回到 AI Production Room 跑一次 Live Session，這裡就會長出故事。'}
                 </div>
               </div>
 

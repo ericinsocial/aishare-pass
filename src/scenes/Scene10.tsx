@@ -31,7 +31,7 @@ export function Scene10({ beat }: SceneProps) {
       <div className={`s10__body ${finale ? 'dimmed' : ''}`}>
         <header className="s10__head">
           <Rise show className="kicker">
-            Scene 10 — AI 工作流程
+            AI 工作流程
           </Rise>
           <Rise show delay={120} as="h2" className="s10__h2">
             人負責什麼，<span className="hl-amber">AI 負責什麼</span>

@@ -412,7 +412,7 @@ function HandoffStage({ state }: { state: FilmState }) {
       <div className="ready-box">
         <span className="k">{ready ? 'READY' : 'CUTTING'}</span>
         <span className="v">
-          按 <b style={{ color: 'var(--ink)' }}>→</b> 進 Scene 18
+          按 <b style={{ color: 'var(--ink)' }}>→</b> 進下一頁
         </span>
       </div>
       {ready && (
