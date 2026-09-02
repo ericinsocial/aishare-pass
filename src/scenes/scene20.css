@@ -1,0 +1,298 @@
+.deck1418 .s20 {
+  padding: 0;
+  background:
+    radial-gradient(820px 500px at 50% 40%, rgba(86, 211, 208, 0.06), transparent 72%),
+    #06060a;
+}
+
+.deck1418 .s20-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0 88px;
+}
+
+.deck1418 .s20-view {
+  grid-area: 1 / 1;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 460ms ease, transform 500ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    visibility 0s linear 500ms;
+}
+
+.deck1418 .s20-view.in {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.deck1418 .s20-view p {
+  margin: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 460ms ease, transform 500ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.deck1418 .s20-view p.on {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- the flip ---- */
+
+.deck1418 .s20-lines {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  text-align: center;
+}
+
+.deck1418 .s20-lines .assume {
+  font-size: 30px;
+  color: var(--ink-dim);
+}
+
+.deck1418 .s20-lines .claim {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.deck1418 .s20-lines .claim span {
+  color: var(--cyan);
+  transition: color 400ms ease, opacity 400ms ease;
+}
+
+/* "一定" is what stops being true, so that is the word that gets crossed out. */
+.deck1418 .s20-lines .claim span.struck {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 4px;
+}
+
+.deck1418 .s20-lines .why {
+  font-size: 26px;
+  color: var(--ink-faint);
+}
+
+.deck1418 .s20-lines .but {
+  margin-top: 6px;
+  font-size: 46px;
+  font-weight: 900;
+  color: var(--red);
+}
+
+.deck1418 .s20-lines .other {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+}
+
+.deck1418 .s20-flip {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
+  align-items: center;
+  gap: 10px;
+}
+
+.deck1418 .s20-hand {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.deck1418 .s20-hand .palm {
+  font-size: 78px;
+  line-height: 1;
+  filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.7));
+}
+
+/* Mirrored, so the same hand reads as the back of the hand. */
+.deck1418 .s20-hand.flipped .palm {
+  transform: scaleX(-1);
+}
+
+.deck1418 .s20-hand .tag {
+  font: 700 13px/1 var(--mono);
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+}
+
+.deck1418 .s20-routes {
+  position: relative;
+  height: 200px;
+}
+
+.deck1418 .s20-routes svg {
+  width: 100%;
+  height: 100%;
+}
+
+.deck1418 .s20-routes .arc {
+  fill: none;
+  stroke-width: 3;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  opacity: 0;
+  transition: stroke-dashoffset 900ms ease, opacity 400ms ease;
+}
+
+.deck1418 .s20-routes .arc.a { stroke: var(--cyan); }
+.deck1418 .s20-routes .arc.b { stroke: var(--gold); }
+
+.deck1418 .s20-routes .arc.on {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.deck1418 .s20-routes .arc.faded {
+  opacity: 0.32;
+}
+
+.deck1418 .s20-routes .route-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 700 15px/1 var(--font);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+
+.deck1418 .s20-routes .route-label.on { opacity: 1; }
+.deck1418 .s20-routes .route-label.faded { opacity: 0.4; }
+
+.deck1418 .s20-routes .route-label.top {
+  top: 2px;
+  color: var(--cyan);
+}
+
+.deck1418 .s20-routes .route-label.bottom {
+  bottom: 2px;
+  color: var(--gold);
+}
+
+/* ---- what AI actually changed ---- */
+
+.deck1418 .s20-meaning {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+  text-align: center;
+}
+
+.deck1418 .s20-meaning .m0 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--ink-dim);
+}
+
+.deck1418 .s20-meaning .m1 {
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 4px;
+}
+
+.deck1418 .s20-meaning .m2 {
+  margin-top: 10px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.deck1418 .s20-meaning .m3 {
+  font-size: 86px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--gold);
+  text-shadow: 0 0 70px rgba(242, 193, 78, 0.25);
+}
+
+/* ---- 以前 / 現在 ---- */
+
+.deck1418 .s20-then-now {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  align-items: stretch;
+}
+
+.deck1418 .s20-then-now .col {
+  border: 1px solid var(--line);
+  background: #0d0d14;
+  border-radius: 18px;
+  padding: 32px 34px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 480ms ease, transform 520ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    border-color 480ms ease;
+}
+
+.deck1418 .s20-then-now .col.on {
+  opacity: 1;
+  transform: none;
+}
+
+.deck1418 .s20-then-now .when {
+  font: 800 14px/1 var(--mono);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.deck1418 .s20-then-now .say {
+  margin: 20px 0 0;
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  opacity: 1;
+  transform: none;
+}
+
+.deck1418 .s20-then-now .then .say {
+  color: var(--ink-faint);
+}
+
+.deck1418 .s20-then-now .now {
+  border-color: rgba(242, 193, 78, 0.4);
+  background: linear-gradient(180deg, rgba(242, 193, 78, 0.08), #0d0d14);
+}
+
+.deck1418 .s20-then-now .now .when {
+  color: var(--gold);
+}
+
+.deck1418 .s20-then-now .ask {
+  margin-top: 18px;
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.deck1418 .s20-then-now .ask.on {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck1418 .s20-view,
+  .deck1418 .s20-view p,
+  .deck1418 .s20-then-now .col,
+  .deck1418 .s20-routes .arc {
+    transition-duration: 1ms;
+  }
+}

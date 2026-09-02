@@ -1,0 +1,221 @@
+.deck1418 .s19 {
+  padding: 0;
+  background:
+    radial-gradient(880px 520px at 50% 44%, rgba(242, 193, 78, 0.06), transparent 72%),
+    #06060a;
+}
+
+.deck1418 .s19-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0 92px;
+}
+
+/* One idea at a time, all in the same box so nothing shifts on stage. */
+.deck1418 .s19-view {
+  grid-area: 1 / 1;
+  width: 100%;
+  display: grid;
+  gap: 26px;
+  justify-items: start;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 460ms ease, transform 500ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    visibility 0s linear 500ms;
+}
+
+.deck1418 .s19-view.in {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.deck1418 .s19-view.center {
+  justify-items: center;
+  text-align: center;
+}
+
+.deck1418 .s19-view p {
+  margin: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 480ms ease, transform 520ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.deck1418 .s19-view p.on,
+.deck1418 .s19-view.center.in p {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- 神作 / 災難 ---- */
+
+.deck1418 .s19-verdicts {
+  display: grid;
+  gap: 14px;
+}
+
+.deck1418 .s19-verdicts .v {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.deck1418 .s19-verdicts .masterpiece span {
+  color: var(--gold);
+}
+
+.deck1418 .s19-verdicts .disaster span {
+  color: var(--red);
+}
+
+.deck1418 .s19-either {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--ink-dim);
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  width: 100%;
+}
+
+/* ---- 重點不是…（弱化） ---- */
+
+.deck1418 .s19-not {
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--ink-dim);
+}
+
+.deck1418 .s19-struck {
+  font-size: 62px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 5px;
+}
+
+/* ---- 幾分鐘以前 ---- */
+
+.deck1418 .s19-ago {
+  font: 800 22px/1 var(--mono);
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.deck1418 .s19-none {
+  font-size: 62px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.deck1418 .s19-raw {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--ink-dim);
+}
+
+/* ---- 主句 ---- */
+
+.deck1418 .s19-main {
+  font-size: 76px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.24;
+}
+
+.deck1418 .s19-main span {
+  color: var(--gold);
+}
+
+/* ---- 路徑 ---- */
+
+.deck1418 .s19-route {
+  width: 100%;
+  display: grid;
+  gap: 40px;
+  justify-items: center;
+}
+
+.deck1418 .s19-route__line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  max-width: 1040px;
+}
+
+/* Waypoints, not a logo wall: same weight, same size, none of them the point. */
+.deck1418 .s19-route__line .step,
+.deck1418 .s19-route__line .hop,
+.deck1418 .s19-route__line .end {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms ease, transform 440ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.deck1418 .s19-route__line.on .step,
+.deck1418 .s19-route__line.on .hop,
+.deck1418 .s19-route__line.on .end {
+  opacity: 1;
+  transform: none;
+}
+
+.deck1418 .s19-route__line .hop {
+  font-size: 18px;
+  color: #3a3a48;
+}
+
+.deck1418 .s19-route__line .step {
+  border: 1px solid var(--line);
+  background: #101018;
+  border-radius: 999px;
+  padding: 11px 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+
+.deck1418 .s19-route__line .end {
+  font-size: 20px;
+  font-weight: 800;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px dashed #3a3a48;
+}
+
+.deck1418 .s19-route__line .end.from {
+  color: var(--cyan);
+}
+
+.deck1418 .s19-route__line .end.to {
+  color: var(--gold);
+}
+
+.deck1418 .s19-punch {
+  font-size: 78px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.deck1418 .s19-punch span {
+  color: var(--gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck1418 .s19-view,
+  .deck1418 .s19-view p,
+  .deck1418 .s19-route__line .step,
+  .deck1418 .s19-route__line .hop,
+  .deck1418 .s19-route__line .end {
+    transition-duration: 1ms;
+  }
+}
