@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 
 /** Tags the Scene09–12 reveals actually render as. */
-type RiseTag = 'div' | 'h1' | 'h2' | 'p'
+type RiseTag = 'div' | 'h1' | 'h2' | 'p' | 'li'
 
 interface RiseProps {
   show: boolean

@@ -108,7 +108,7 @@ export function Scene12({ beat }: SceneProps) {
                   show={beat >= 3}
                   delay={140 + i * 130}
                   variant="left"
-                  as="p"
+                  as="li"
                   className="s12__loop-step"
                 >
                   <span className="n">{String(i + 1).padStart(2, '0')}</span>
