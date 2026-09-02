@@ -285,3 +285,390 @@
   text-decoration-color: var(--accent);
   text-decoration-thickness: 5px;
 }
+
+/* ===================== Scene 05 — Prompt 五大元素 ===================== */
+
+/* The two opening lines share one slot so neither is nudged off centre. */
+.s05__swap {
+  position: absolute;
+  inset: 0;
+}
+
+.s05__swap > .reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 96px 140px;
+}
+
+.s05__struck {
+  color: var(--ink-soft);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 10px;
+}
+
+.s05__struck-line {
+  color: var(--ink-soft);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 6px;
+}
+
+.s05__list-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 44px;
+  padding: 96px 140px;
+  pointer-events: none;
+}
+
+.s05__list-head {
+  max-width: 1440px;
+  display: flex;
+  align-items: baseline;
+  gap: 32px;
+  font-size: 56px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--accent-cool);
+}
+
+.s05__count {
+  font-family: var(--font-latin);
+  font-size: 32px;
+  letter-spacing: 0.24em;
+  color: var(--ink-faint);
+}
+
+.s05__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.s05__row {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  padding: 22px 40px;
+  border-radius: 20px;
+  border: 2px solid rgba(74, 217, 255, 0.16);
+  background: rgba(8, 12, 22, 0.62);
+  transition:
+    border-color 520ms var(--ease-stage),
+    background 520ms var(--ease-stage);
+}
+
+.s05__row.is-newest {
+  border-color: rgba(74, 217, 255, 0.62);
+  background: rgba(10, 26, 40, 0.78);
+}
+
+.s05__tick {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-weight: 800;
+  color: #05050a;
+  background: var(--accent-cool);
+}
+
+/* Fixed width so every question starts on the same x. */
+.s05__name {
+  flex: 0 0 auto;
+  width: 180px;
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.s05__ask {
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.s05__close {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 44px;
+  padding: 96px 140px;
+}
+
+/* ===================== Scene 06 — Conversation ======================== */
+
+.s06__swap {
+  position: absolute;
+  inset: 0;
+}
+
+.s06__swap > .reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 96px 140px;
+}
+
+.s06__struck {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 10px;
+}
+
+.s06__thread-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  padding: 96px 160px;
+  pointer-events: none;
+}
+
+.s06__turn--me {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.s06__turn--ai {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.s06__bubble {
+  max-width: 1180px;
+  margin: 0;
+  padding: 28px 44px;
+  font-size: 44px;
+  line-height: 1.42;
+}
+
+/* What you said: the load-bearing half of the thread. */
+.s06__bubble--me {
+  border-radius: 32px 32px 10px 32px;
+  border: 2px solid rgba(74, 217, 255, 0.5);
+  background: rgba(10, 26, 40, 0.82);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* What it gave back: present, but never the point. */
+.s06__bubble--ai {
+  border-radius: 32px 32px 32px 10px;
+  border: 2px solid rgba(247, 244, 240, 0.14);
+  background: rgba(10, 10, 16, 0.72);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.s06__tag {
+  display: inline-block;
+  margin-right: 20px;
+  padding: 4px 20px 6px;
+  border-radius: 999px;
+  background: var(--accent-warm);
+  color: #05050a;
+  font-size: 28px;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  vertical-align: middle;
+}
+
+.s06__close {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 96px 140px;
+}
+
+/* ===================== Scene 08 — IDEA to REALITY ===================== */
+
+.s08__title-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 96px 140px;
+  transition: transform 780ms var(--ease-stage);
+}
+
+/* Once the flow starts building, the title steps up out of its way. */
+.s08__title-block.is-raised {
+  transform: translateY(-340px);
+}
+
+.s08__title {
+  font-family: var(--font-latin);
+  font-size: 140px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin: 0;
+}
+
+.s08__arrow {
+  color: var(--accent-warm);
+  padding: 0 24px;
+}
+
+.s08__flow-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 96px 72px;
+  pointer-events: none;
+}
+
+.s08__flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.s08__slot {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.s08__link {
+  flex: 0 0 auto;
+  padding: 0 8px;
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--accent-warm);
+}
+
+.s08__link--spacer {
+  visibility: hidden;
+}
+
+.s08__step-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.s08__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-height: 292px;
+  padding: 36px 18px 40px;
+  border-radius: 26px;
+  border: 2px solid rgba(255, 176, 32, 0.2);
+  background: rgba(14, 11, 6, 0.72);
+  text-align: center;
+  transition:
+    border-color 520ms var(--ease-stage),
+    background 520ms var(--ease-stage);
+}
+
+.s08__step.is-newest {
+  border-color: rgba(255, 176, 32, 0.72);
+  background: rgba(34, 24, 6, 0.82);
+}
+
+.s08__icon {
+  font-size: 76px;
+  line-height: 1;
+}
+
+.s08__label {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.s08__note {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* Return arrow, spanning the centre of 說 back from the centre of 改. */
+.s08__loop-wrap {
+  width: 60%;
+  margin: 44px 10% 0 30%;
+}
+
+.s08__loop {
+  position: relative;
+  height: 118px;
+}
+
+.s08__loop::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 84px;
+  border-left: 4px dashed var(--accent-warm);
+  border-right: 4px dashed var(--accent-warm);
+  border-bottom: 4px dashed var(--accent-warm);
+  border-radius: 0 0 44px 44px;
+  opacity: 0.85;
+}
+
+.s08__loop-head {
+  position: absolute;
+  left: -12px;
+  top: -13px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 18px solid var(--accent-warm);
+}
+
+.s08__loop-label {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  padding: 8px 32px 10px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 2px solid var(--accent-warm);
+  color: var(--accent-warm);
+  font-size: 30px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.s08__close {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 96px 140px;
+}

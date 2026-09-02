@@ -39,13 +39,16 @@ npm run preview    # 預覽 build 結果
 | 02 | AI 能力時間線 | 5 | `#/presenter/02/0` |
 | 03 | AI 翻車 | 4 | `#/presenter/03/0` |
 | 04 | Prompt Archaeology | 4 | `#/presenter/04/0` |
+| 05 | Prompt 五大元素 | 8 | `#/presenter/05/0` |
+| 06 | Conversation | 8 | `#/presenter/06/0` |
+| 08 | IDEA → REALITY | 7 | `#/presenter/08/0` |
 | 14 | DONE ≠ RIGHT | 9 | `#/presenter/14/0` |
 | 15 | 方法論 recap | 8 | `#/presenter/15/0` |
 | 16 | Showtime 轉場 | 4 | `#/presenter/16/0` |
 | 17 | AI Production Room | 1 | `#/presenter/17/0` |
 | 18 | Premiere | 5 | `#/presenter/18/0` |
 
-Scene 13 沒有最終版本，刻意不存在。
+Scene 07 與 Scene 09–13 沒有排進 deck，編號刻意不補。
 
 ### Scene 01 beat 對照
 
@@ -89,8 +92,6 @@ src/
   styles/      global / stage / scenes / scenes1418
   types/       Scene 與 beat 型別
 ```
-
-`src/scenes/` 另外已經有 Scene05 / Scene06 / Scene08，目前只從 `index.ts` 匯出，還沒有排進上面的 deck 順序
 
 Scene 圖片直接引用 repo 根目錄的原圖，未經修改
 
