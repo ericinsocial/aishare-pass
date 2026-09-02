@@ -1,12 +1,18 @@
-import type { SceneProps } from '../deck'
+import type { SceneProps } from '../types/scene'
+import { Deck1418Frame } from './Deck1418Frame'
 import './scene16.css'
 
-export default function Scene16({ step }: SceneProps) {
+export const SCENE_16_BEATS = 4
+
+export function Scene16({ beat }: SceneProps) {
+  const step = beat
+
   const lights = step >= 1
   const swap = step >= 2
   const cue = step >= 3
 
   return (
+    <Deck1418Frame>
     <section className="scene s16">
       <div className={`s16-beams${lights ? ' on' : ''}`}>
         <div className="s16-beam a">
@@ -42,5 +48,6 @@ export default function Scene16({ step }: SceneProps) {
         </div>
       </div>
     </section>
+    </Deck1418Frame>
   )
 }

@@ -1,21 +1,21 @@
-.s16 {
+.deck1418 .s16 {
   padding: 0;
   background: #050508;
   overflow: hidden;
 }
 
-.s16-beams {
+.deck1418 .s16-beams {
   position: absolute;
   inset: -20%;
   opacity: 0;
   transition: opacity 900ms ease;
 }
 
-.s16-beams.on {
+.deck1418 .s16-beams.on {
   opacity: 1;
 }
 
-.s16-beam {
+.deck1418 .s16-beam {
   position: absolute;
   top: -30%;
   width: 340px;
@@ -25,7 +25,7 @@
   filter: blur(34px);
 }
 
-.s16-beam i {
+.deck1418 .s16-beam i {
   display: block;
   width: 100%;
   height: 100%;
@@ -33,17 +33,17 @@
   background: linear-gradient(180deg, rgba(242, 193, 78, 0.24), rgba(242, 193, 78, 0) 82%);
 }
 
-.s16-beam.a {
+.deck1418 .s16-beam.a {
   left: 22%;
   animation: sweepA 6s ease-in-out infinite alternate;
 }
 
-.s16-beam.b {
+.deck1418 .s16-beam.b {
   left: 62%;
   animation: sweepB 7.5s ease-in-out infinite alternate;
 }
 
-.s16-beam.b i {
+.deck1418 .s16-beam.b i {
   background: linear-gradient(180deg, rgba(86, 211, 208, 0.18), rgba(86, 211, 208, 0) 82%);
 }
 
@@ -57,7 +57,7 @@
   to { transform: rotate(-13deg); }
 }
 
-.s16-marquee {
+.deck1418 .s16-marquee {
   position: absolute;
   inset: 26px;
   border-radius: 20px;
@@ -65,13 +65,13 @@
   transition: border-color 700ms ease, box-shadow 700ms ease;
 }
 
-.s16-marquee.on {
+.deck1418 .s16-marquee.on {
   border-color: rgba(242, 193, 78, 0.5);
   box-shadow: 0 0 60px -12px rgba(242, 193, 78, 0.35) inset,
     0 0 90px -30px rgba(242, 193, 78, 0.5);
 }
 
-.s16-bulbs {
+.deck1418 .s16-bulbs {
   position: absolute;
   inset: -5px;
   border-radius: 22px;
@@ -84,7 +84,7 @@
   transition: opacity 700ms ease;
 }
 
-.s16-bulbs.on {
+.deck1418 .s16-bulbs.on {
   opacity: 0.9;
   animation: chase 1.1s steps(4) infinite;
 }
@@ -95,7 +95,7 @@
   100% { filter: brightness(1); }
 }
 
-.s16-content {
+.deck1418 .s16-content {
   position: absolute;
   inset: 0;
   display: grid;
@@ -105,18 +105,18 @@
   text-align: center;
 }
 
-.s16-pre {
+.deck1418 .s16-pre {
   font-size: 30px;
   color: var(--ink-dim);
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
-.s16-pre.gone {
+.deck1418 .s16-pre.gone {
   opacity: 0;
   transform: translateY(-16px);
 }
 
-.s16-showtime {
+.deck1418 .s16-showtime {
   font-size: 132px;
   font-weight: 900;
   letter-spacing: 0.06em;
@@ -131,12 +131,12 @@
   text-shadow: 0 0 70px rgba(242, 193, 78, 0.28);
 }
 
-.s16-showtime.in {
+.deck1418 .s16-showtime.in {
   opacity: 1;
   transform: none;
 }
 
-.s16-swap {
+.deck1418 .s16-swap {
   margin-top: 14px;
   display: grid;
   gap: 12px;
@@ -145,12 +145,12 @@
   transition: opacity 480ms ease, transform 480ms ease;
 }
 
-.s16-swap.in {
+.deck1418 .s16-swap.in {
   opacity: 1;
   transform: none;
 }
 
-.s16-swap .from {
+.deck1418 .s16-swap .from {
   font-size: 28px;
   color: var(--ink-faint);
   text-decoration: line-through;
@@ -158,18 +158,18 @@
   text-decoration-thickness: 3px;
 }
 
-.s16-swap .to {
+.deck1418 .s16-swap .to {
   font-size: 46px;
   font-weight: 800;
   color: var(--ink);
 }
 
-.s16-swap .to em {
+.deck1418 .s16-swap .to em {
   font-style: normal;
   color: var(--gold);
 }
 
-.s16-cue {
+.deck1418 .s16-cue {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -178,12 +178,12 @@
   transition: opacity 480ms ease 120ms, transform 480ms ease 120ms;
 }
 
-.s16-cue.in {
+.deck1418 .s16-cue.in {
   opacity: 1;
   transform: none;
 }
 
-.s16-cue .room {
+.deck1418 .s16-cue .room {
   font: 700 13px/1 var(--mono);
   letter-spacing: 0.26em;
   color: var(--ink-dim);

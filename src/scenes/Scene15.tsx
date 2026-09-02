@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
-import type { SceneProps } from '../deck'
+import type { SceneProps } from '../types/scene'
+import { Deck1418Frame } from './Deck1418Frame'
 import './scene15.css'
 
 const STEPS: Array<{ emoji: string; word: string; en: string; desc: string }> = [
@@ -10,12 +11,17 @@ const STEPS: Array<{ emoji: string; word: string; en: string; desc: string }> = 
   { emoji: '🔁', word: '改', en: 'Iterate', desc: '把差距講回去，再跑一次。好東西是改出來的。' },
 ]
 
-export default function Scene15({ step }: SceneProps) {
+export const SCENE_15_BEATS = 8
+
+export function Scene15({ beat }: SceneProps) {
+  const step = beat
+
   const shown = Math.min(Math.max(step, 0), STEPS.length)
   const loop = step >= STEPS.length + 1
   const final = step >= STEPS.length + 2
 
   return (
+    <Deck1418Frame>
     <section className="scene s15">
       <div className="scene-kicker">Scene 15 · Recap</div>
 
@@ -59,5 +65,6 @@ export default function Scene15({ step }: SceneProps) {
         </div>
       </div>
     </section>
+    </Deck1418Frame>
   )
 }

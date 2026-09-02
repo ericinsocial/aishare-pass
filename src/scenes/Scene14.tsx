@@ -1,4 +1,5 @@
-import type { SceneProps } from '../deck'
+import type { SceneProps } from '../types/scene'
+import { Deck1418Frame } from './Deck1418Frame'
 import './scene14.css'
 
 const AI_CLAIMS = ['需求全部實作完成', '所有測試通過', '沒有已知問題']
@@ -12,12 +13,17 @@ const ISSUES: Array<[string, string]> = [
   ['測試是它寫的，也是它說通過的', '沒有人驗過那份測試在測什麼'],
 ]
 
-export default function Scene14({ step }: SceneProps) {
+export const SCENE_14_BEATS = 9
+
+export function Scene14({ beat }: SceneProps) {
+  const step = beat
+
   const issuesShown = Math.min(Math.max(step, 0), ISSUES.length)
   const busted = step >= ISSUES.length + 1
   const final = step >= ISSUES.length + 2
 
   return (
+    <Deck1418Frame>
     <section className="scene s14">
       <div className="scene-kicker">Scene 14 · Done ≠ Right</div>
 
@@ -73,5 +79,6 @@ export default function Scene14({ step }: SceneProps) {
         </div>
       </div>
     </section>
+    </Deck1418Frame>
   )
 }

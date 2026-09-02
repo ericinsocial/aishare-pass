@@ -1,7 +1,15 @@
-:root {
-  --stage-w: 1280px;
-  --stage-h: 720px;
+/* ------------------------------------------------------------------
+   Scene 14–18 — shared atoms.
 
+   These scenes were composed against a 1280x720 canvas. <Deck1418Frame />
+   renders that canvas inside the 1920x1080 stage at an exact 1.5x scale, so
+   every length below stays a real design pixel of the original composition.
+
+   Everything is scoped under .deck1418 (tokens included) so it cannot reach
+   Scene 01–08, which use the stage tokens from global.css.
+   ------------------------------------------------------------------ */
+
+.deck1418 {
   --ink: #f3f0e9;
   --ink-dim: #a5a095;
   --ink-faint: #6d6a63;
@@ -21,60 +29,38 @@
     "Noto Sans TC", "Microsoft JhengHei", "Hiragino Sans", sans-serif;
   --mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
 
-  color-scheme: dark;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-}
-
-body {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font);
-  overflow: hidden;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
-button {
+/* The 1280x720 composition box, pinned top-left and scaled to the stage. */
+.deck1418__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 720px;
+  transform: scale(1.5);
+  transform-origin: top left;
+}
+
+.deck1418 button {
   font: inherit;
   color: inherit;
   cursor: pointer;
 }
 
-input {
+.deck1418 input {
   font: inherit;
 }
 
-/* ---------- deck shell ---------- */
-
-.deck {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(1100px 620px at 50% -10%, #14141f 0%, transparent 70%),
-    var(--bg);
-}
-
-.stage {
-  width: var(--stage-w);
-  height: var(--stage-h);
-  position: relative;
-  overflow: hidden;
-  background: var(--bg);
-  transform-origin: center center;
-}
-
-.scene {
+.deck1418 .scene {
   position: absolute;
   inset: 0;
   padding: 56px 72px;
@@ -82,7 +68,7 @@ input {
   flex-direction: column;
 }
 
-.scene-kicker {
+.deck1418 .scene-kicker {
   font: 600 13px/1 var(--mono);
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -92,68 +78,28 @@ input {
   gap: 12px;
 }
 
-.scene-kicker::after {
+.deck1418 .scene-kicker::after {
   content: "";
   flex: 1;
   height: 1px;
   background: linear-gradient(90deg, var(--line), transparent);
 }
 
-.deck-hud {
-  position: fixed;
-  right: 18px;
-  bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font: 500 12px/1 var(--mono);
-  color: var(--ink-faint);
-  letter-spacing: 0.12em;
-  z-index: 5;
-}
-
-.deck-hud .dots {
-  display: flex;
-  gap: 6px;
-}
-
-.deck-hud .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #2a2a35;
-  transition: background 180ms ease, transform 180ms ease;
-}
-
-.deck-hud .dot.on {
-  background: var(--gold);
-  transform: scale(1.25);
-}
-
-.deck-help {
-  position: fixed;
-  left: 18px;
-  bottom: 14px;
-  font: 500 12px/1 var(--mono);
-  color: #3b3b45;
-  letter-spacing: 0.1em;
-  z-index: 5;
-}
-
 /* ---------- shared atoms ---------- */
 
-.reveal {
+/* Named apart from the stage's own .reveal so the two never interleave. */
+.deck1418 .reveal1418 {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 420ms ease, transform 420ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
-.reveal.in {
+.deck1418 .reveal1418.in {
   opacity: 1;
   transform: none;
 }
 
-.chip {
+.deck1418 .chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -167,39 +113,39 @@ input {
   color: var(--ink-dim);
 }
 
-.chip.mock {
+.deck1418 .chip.mock {
   border-color: #4a3a12;
   background: #1d1708;
   color: var(--gold);
 }
 
-.chip.live {
+.deck1418 .chip.live {
   border-color: #4d1a1a;
   background: #200d0d;
   color: var(--red);
 }
 
-.chip.live .pulse {
+.deck1418 .chip.live .pulse {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--red);
-  animation: pulse 1.3s ease-in-out infinite;
+  animation: pulse1418 1.3s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes pulse1418 {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.35; transform: scale(0.75); }
 }
 
-.punch {
+.deck1418 .punch {
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.08;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .deck1418 .reveal1418 {
     transition-duration: 1ms;
   }
 }

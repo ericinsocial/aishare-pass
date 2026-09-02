@@ -1,11 +1,16 @@
 import closingUrl from '../../09.png'
-import type { SceneProps } from '../deck'
+import type { SceneProps } from '../types/scene'
+import { Deck1418Frame } from './Deck1418Frame'
 import { useFilmState } from '../film/FilmProvider'
 import { selectCast, selectRuntimeLabel, selectStyleLabels } from '../film/selectors'
 import { AI_PRODUCTION_CREDITS } from '../film/types'
 import './scene18.css'
 
-export default function Scene18({ step }: SceneProps) {
+export const SCENE_18_BEATS = 5
+
+export function Scene18({ beat }: SceneProps) {
+  const step = beat
+
   const state = useFilmState()
   const cast = selectCast(state)
   const styles = selectStyleLabels(state)
@@ -17,6 +22,7 @@ export default function Scene18({ step }: SceneProps) {
   const closingLine = step >= 4
 
   return (
+    <Deck1418Frame>
     <section className="scene s18">
       <div className="s18-head">
         <h2>PREMIERE</h2>
@@ -64,7 +70,7 @@ export default function Scene18({ step }: SceneProps) {
             <div className="credit-name">Eric</div>
           </div>
 
-          <div className={`credit-block reveal${showCast ? ' in' : ''}`}>
+          <div className={`credit-block reveal1418${showCast ? ' in' : ''}`}>
             <div className="credit-role">Cast</div>
             {cast.length === 0 && <div className="cast-line">—</div>}
             <div className={`cast-list${cast.length > 6 ? ' dense' : ''}`}>
@@ -78,7 +84,7 @@ export default function Scene18({ step }: SceneProps) {
             </div>
           </div>
 
-          <div className={`credit-block reveal${showRest ? ' in' : ''}`}>
+          <div className={`credit-block reveal1418${showRest ? ' in' : ''}`}>
             <div className="credit-role">Style</div>
             {styles.length ? (
               styles.map((s) => (
@@ -91,7 +97,7 @@ export default function Scene18({ step }: SceneProps) {
             )}
           </div>
 
-          <div className={`credit-block reveal${showRest ? ' in' : ''}`}>
+          <div className={`credit-block reveal1418${showRest ? ' in' : ''}`}>
             <div className="credit-role">AI Production</div>
             {AI_PRODUCTION_CREDITS.map((c) => (
               <div className="prod-line" key={c.role}>
@@ -113,5 +119,6 @@ export default function Scene18({ step }: SceneProps) {
         </div>
       </div>
     </section>
+    </Deck1418Frame>
   )
 }

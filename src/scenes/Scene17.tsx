@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import posterUrl from '../../DROPTHEBEE.png'
+import { Deck1418Frame } from './Deck1418Frame'
 import { useFilmCommand, useFilmState } from '../film/FilmProvider'
 import { selectStyleLabels } from '../film/selectors'
 import { FILM_STYLES, PHASE_ORDER, type FilmPhase, type FilmState } from '../film/types'
@@ -298,10 +299,14 @@ function ProductionStage({ state }: { state: FilmState }) {
   )
 }
 
-export default function Scene17() {
+export const SCENE_17_BEATS = 1
+
+/** Interaction-driven: LOCK, style picking and start are clicks, not beats. */
+export function Scene17() {
   const state = useFilmState()
 
   return (
+    <Deck1418Frame>
     <section className="scene s17">
       <div className="s17-bg" style={{ backgroundImage: `url(${posterUrl})` }} />
 
@@ -344,5 +349,6 @@ export default function Scene17() {
         </div>
       </div>
     </section>
+    </Deck1418Frame>
   )
 }
