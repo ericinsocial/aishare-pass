@@ -10,6 +10,11 @@ import { Scene09, SCENE_09_BEATS } from './Scene09'
 import { Scene10, SCENE_10_BEATS } from './Scene10'
 import { Scene11, SCENE_11_BEATS } from './Scene11'
 import { Scene12, SCENE_12_BEATS } from './Scene12'
+import { Scene14, SCENE_14_BEATS } from './Scene14'
+import { Scene15, SCENE_15_BEATS } from './Scene15'
+import { Scene16, SCENE_16_BEATS } from './Scene16'
+import { Scene17, SCENE_17_BEATS } from './Scene17'
+import { Scene18, SCENE_18_BEATS } from './Scene18'
 
 /**
  * Deck order. The slug is the URL segment: #/presenter/<slug>/<beat>
@@ -82,5 +87,36 @@ export const scenes: Scene[] = [
     title: '罵得有規格',
     beats: SCENE_12_BEATS,
     view: Scene12,
+  },
+  // Scene 13 has no final version; the deck steps from 12 straight to 14.
+  {
+    slug: '14',
+    title: 'DONE ≠ RIGHT',
+    beats: SCENE_14_BEATS,
+    view: Scene14,
+  },
+  {
+    slug: '15',
+    title: '方法論 recap',
+    beats: SCENE_15_BEATS,
+    view: Scene15,
+  },
+  {
+    slug: '16',
+    title: 'Showtime 轉場',
+    beats: SCENE_16_BEATS,
+    view: Scene16,
+  },
+  {
+    slug: '17',
+    title: 'AI Production Room',
+    beats: SCENE_17_BEATS,
+    view: Scene17,
+  },
+  {
+    slug: '18',
+    title: 'Premiere',
+    beats: SCENE_18_BEATS,
+    view: Scene18,
   },
 ]
