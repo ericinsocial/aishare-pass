@@ -3,7 +3,7 @@ import { Reveal } from '../components/Reveal'
 import type { SceneProps } from '../types/scene'
 import timelineImage from '../../02 2022-2026.png'
 
-export const SCENE_02_BEATS = 5
+export const SCENE_02_BEATS = 7
 
 interface TimelineNode {
   year: string
@@ -12,17 +12,22 @@ interface TimelineNode {
   items: string[]
 }
 
+/**
+ * Deliberately not a feature list. Each year describes the same thing —
+ * what it takes to get something done — so the audience hears the path
+ * getting shorter on your side and longer on the machine's.
+ */
 const NODES: TimelineNode[] = [
-  { year: '2022', beat: 1, items: ['生成一段文字'] },
-  { year: '2024', beat: 2, items: ['寫程式', '讀圖片', '生成圖片'] },
-  { year: '2026', beat: 3, items: ['看影片', '操作工具', '跑完一整段流程'] },
+  { year: '2022', beat: 1, items: ['你問，它回答'] },
+  { year: '2024', beat: 2, items: ['你描述，它開始幫你做'] },
+  { year: '2026', beat: 3, items: ['你說出想法', '它開始幫你完成一整段工作'] },
 ]
 
 /** How far the track has filled at each beat. */
-const FILL_BY_BEAT = ['0%', '0%', '50%', '100%', '100%']
+const FILL_BY_BEAT = ['0%', '0%', '50%', '100%', '100%', '100%', '100%']
 
 export function Scene02Timeline({ beat }: SceneProps) {
-  // The timeline holds beats 1-3, then clears for the closing line.
+  // The timeline holds beats 1-3, then clears for the closing lines.
   const onTimeline = beat >= 1 && beat <= 3
 
   return (
@@ -76,15 +81,27 @@ export function Scene02Timeline({ beat }: SceneProps) {
           />
         </Reveal>
 
-        {/* 結論 */}
-        <Reveal show={beat >= 4} from="up" className="s02__conclusion">
-          <p className="line-lg">
-            不是突然出現一個<span className="hot-warm">新工具</span>
-          </p>
-          <p className="line-lg">
-            而是 AI 能做的事情<span className="hot-warm">快速擴張</span>
-          </p>
-        </Reveal>
+        {/* 收束：先講邊界擴張，再把重點推到「路徑」上 */}
+        <div className="s02__closing">
+          <Reveal show={beat === 4} from="up" className="s02__conclusion">
+            <p className="line-lg">AI 能做的事情</p>
+            <p className="line-lg">
+              正在<span className="hot-warm">快速擴張</span>
+            </p>
+          </Reveal>
+
+          <Reveal show={beat >= 5} from="up" className="s02__conclusion">
+            <div className={`s02__setup${beat >= 6 ? ' is-quiet' : ''}`}>
+              <p className="line-md">真正改變的</p>
+              <p className="line-lg">不只是 AI 會做更多事情</p>
+            </div>
+            <Reveal show={beat >= 6} from="up" delay={140} className="s02__punch">
+              <p className="line-lg">
+                而是做到一件事情的路徑，<span className="hot">變了</span>
+              </p>
+            </Reveal>
+          </Reveal>
+        </div>
       </div>
     </>
   )

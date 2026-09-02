@@ -203,13 +203,6 @@
   color: var(--cyan);
 }
 
-.s11__proj-org {
-  margin: 0;
-  font-size: 22px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
 .s11__proj-title {
   margin: 8px 0 0;
   font-size: 46px;
@@ -220,6 +213,14 @@
 .s11__proj-title--sm {
   margin-top: 0;
   font-size: 38px;
+}
+
+/* The hero card now leads with the project name, so it sits under the
+   badge and drops a size to keep the name on one line. */
+.s11__proj-title--hero {
+  margin-top: 0;
+  font-size: 38px;
+  text-wrap: balance;
 }
 
 .s11__proj-meta {

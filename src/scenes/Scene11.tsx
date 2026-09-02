@@ -115,8 +115,9 @@ export function Scene11({ beat }: SceneProps) {
         <div className="s11__projects">
           <Rise show={beat >= 2} variant="pop" className="s11__proj s11__proj--hero">
             <span className="s11__badge s11__badge--real">實際畫面</span>
-            <p className="s11__proj-org">內政部警政署刑事警察局</p>
-            <p className="s11__proj-title">沉浸式 AR 詐騙體驗</p>
+            <p className="s11__proj-title s11__proj-title--hero">
+              刑事警察局反詐 AR APP
+            </p>
             <p className="s11__proj-meta">
               {SHOTS.length} 個情境模組 · AR 辨識 · AI 影片 · 互動流程
             </p>

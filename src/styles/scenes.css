@@ -159,7 +159,7 @@
 }
 
 .s02__node {
-  width: 500px;
+  width: 540px;
 }
 
 .s02__node:nth-child(2) {
@@ -189,7 +189,8 @@
 }
 
 .s02__items li {
-  font-size: 44px;
+  font-size: 40px;
+  line-height: 1.3;
   font-weight: 600;
   color: var(--ink-soft);
 }
@@ -204,6 +205,29 @@
   gap: 18px;
   text-align: center;
   padding: 0 140px;
+}
+
+/* The closing lines share one slot, so each stage lands dead centre. */
+.s02__closing {
+  position: absolute;
+  inset: 0;
+}
+
+.s02__setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transition: opacity var(--beat-duration) var(--ease-stage);
+}
+
+/* Steps back once the punch line arrives, without leaving the stage. */
+.s02__setup.is-quiet {
+  opacity: 0.4;
+}
+
+.s02__punch {
+  margin-top: 30px;
 }
 
 /* ===================== Scene 03 — When AI fails ======================= */
@@ -245,6 +269,78 @@
 
 /* ===================== Scene 04 — Prompt archaeology ================== */
 
+/* Beat 0 — the prompt itself. Small, dense, and not meant to be read from
+   row ten: the length is the joke, so it stays one slab of text. */
+.s04__archive {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 64px 120px 56px;
+}
+
+.s04__archive-title {
+  font-size: 72px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.s04__doc-slot {
+  flex: 1;
+  min-height: 0;
+  margin-top: 30px;
+}
+
+.s04__doc {
+  height: 100%;
+  padding: 32px 40px 30px;
+  border-radius: 26px;
+  border: 2px solid rgba(255, 176, 32, 0.26);
+  background: rgba(8, 8, 14, 0.88);
+  box-shadow: 0 0 80px rgba(255, 176, 32, 0.08);
+  overflow: hidden;
+}
+
+.s04__doc-text {
+  height: 100%;
+  column-count: 2;
+  column-gap: 56px;
+  column-rule: 1px solid rgba(247, 244, 240, 0.1);
+  font-size: 18px;
+  line-height: 1.72;
+  font-weight: 400;
+  color: rgba(247, 244, 240, 0.76);
+  text-align: justify;
+}
+
+.s04__doc-para {
+  margin: 0 0 10px;
+}
+
+.s04__doc-answer {
+  color: var(--accent-warm);
+  font-weight: 700;
+}
+
+/* The cursor still sitting at the end of everything he typed. */
+.s04__caret {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  margin-left: 8px;
+  vertical-align: -0.16em;
+  background: var(--accent-warm);
+  animation: s04-caret 1.05s steps(2, end) infinite;
+}
+
+@keyframes s04-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
 .s04__block {
   position: absolute;
   inset: 0;
@@ -259,7 +355,7 @@
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
-  max-width: 1560px;
+  max-width: 1640px;
 }
 
 .s04__spell {
@@ -275,15 +371,6 @@
     border-color 520ms var(--ease-stage),
     opacity 520ms var(--ease-stage),
     filter 520ms var(--ease-stage);
-}
-
-.s04__spell.is-dead {
-  color: rgba(247, 244, 240, 0.4);
-  border-color: rgba(247, 244, 240, 0.14);
-  background: rgba(10, 10, 16, 0.7);
-  text-decoration: line-through;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 5px;
 }
 
 /* ===================== Scene 05 — Prompt 五大元素 ===================== */
