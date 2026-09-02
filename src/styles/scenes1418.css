@@ -1,0 +1,151 @@
+/* ------------------------------------------------------------------
+   Scene 14–18 — shared atoms.
+
+   These scenes were composed against a 1280x720 canvas. <Deck1418Frame />
+   renders that canvas inside the 1920x1080 stage at an exact 1.5x scale, so
+   every length below stays a real design pixel of the original composition.
+
+   Everything is scoped under .deck1418 (tokens included) so it cannot reach
+   Scene 01–08, which use the stage tokens from global.css.
+   ------------------------------------------------------------------ */
+
+.deck1418 {
+  --ink: #f3f0e9;
+  --ink-dim: #a5a095;
+  --ink-faint: #6d6a63;
+  --bg: #08080c;
+  --panel: #101019;
+  --panel-2: #16161f;
+  --line: #26262f;
+
+  --gold: #f2c14e;
+  --gold-soft: #f7dfa2;
+  --cyan: #56d3d0;
+  --red: #ff5d54;
+  --green: #57d98a;
+  --violet: #9a7bff;
+
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC",
+    "Noto Sans TC", "Microsoft JhengHei", "Hiragino Sans", sans-serif;
+  --mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The 1280x720 composition box, pinned top-left and scaled to the stage. */
+.deck1418__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 720px;
+  transform: scale(1.5);
+  transform-origin: top left;
+}
+
+.deck1418 button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.deck1418 input {
+  font: inherit;
+}
+
+.deck1418 .scene {
+  position: absolute;
+  inset: 0;
+  padding: 56px 72px;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck1418 .scene-kicker {
+  font: 600 13px/1 var(--mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.deck1418 .scene-kicker::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line), transparent);
+}
+
+/* ---------- shared atoms ---------- */
+
+/* Named apart from the stage's own .reveal so the two never interleave. */
+.deck1418 .reveal1418 {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 420ms ease, transform 420ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.deck1418 .reveal1418.in {
+  opacity: 1;
+  transform: none;
+}
+
+.deck1418 .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font: 600 12px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.deck1418 .chip.mock {
+  border-color: #4a3a12;
+  background: #1d1708;
+  color: var(--gold);
+}
+
+.deck1418 .chip.live {
+  border-color: #4d1a1a;
+  background: #200d0d;
+  color: var(--red);
+}
+
+.deck1418 .chip.live .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: pulse1418 1.3s ease-in-out infinite;
+}
+
+@keyframes pulse1418 {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+.deck1418 .punch {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck1418 .reveal1418 {
+    transition-duration: 1ms;
+  }
+}

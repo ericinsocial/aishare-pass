@@ -6,6 +6,11 @@ import { Scene04PromptArchaeology, SCENE_04_BEATS } from './Scene04PromptArchaeo
 import { Scene05PromptElements, SCENE_05_BEATS } from './Scene05PromptElements'
 import { Scene06Conversation, SCENE_06_BEATS } from './Scene06Conversation'
 import { Scene08IdeaToReality, SCENE_08_BEATS } from './Scene08IdeaToReality'
+import { Scene14, SCENE_14_BEATS } from './Scene14'
+import { Scene15, SCENE_15_BEATS } from './Scene15'
+import { Scene16, SCENE_16_BEATS } from './Scene16'
+import { Scene17, SCENE_17_BEATS } from './Scene17'
+import { Scene18, SCENE_18_BEATS } from './Scene18'
 
 /**
  * Deck order. The slug is the URL segment: #/presenter/<slug>/<beat>
@@ -54,5 +59,36 @@ export const scenes: Scene[] = [
     title: 'IDEA → REALITY',
     beats: SCENE_08_BEATS,
     view: Scene08IdeaToReality,
+  },
+  // Scene 09–13 have no final version; the deck steps from 08 straight to 14.
+  {
+    slug: '14',
+    title: 'DONE ≠ RIGHT',
+    beats: SCENE_14_BEATS,
+    view: Scene14,
+  },
+  {
+    slug: '15',
+    title: '方法論 recap',
+    beats: SCENE_15_BEATS,
+    view: Scene15,
+  },
+  {
+    slug: '16',
+    title: 'Showtime 轉場',
+    beats: SCENE_16_BEATS,
+    view: Scene16,
+  },
+  {
+    slug: '17',
+    title: 'AI Production Room',
+    beats: SCENE_17_BEATS,
+    view: Scene17,
+  },
+  {
+    slug: '18',
+    title: 'Premiere',
+    beats: SCENE_18_BEATS,
+    view: Scene18,
   },
 ]

@@ -10,9 +10,10 @@ React + TypeScript + Vite，hash routing，純前端（沒有後端、沒有 AI 
 
 ```bash
 npm install
-npm run dev      # 開發
-npm run build    # 產出 dist/
-npm run preview  # 預覽 build 結果
+npm run dev        # 開發
+npm run typecheck  # tsc -b
+npm run build      # 產出 dist/
+npm run preview    # 預覽 build 結果
 ```
 
 `vite.config.ts` 使用 `base: './'` 搭配 hash routing，`dist/` 可直接放上 GitHub Pages
@@ -38,6 +39,16 @@ npm run preview  # 預覽 build 結果
 | 02 | AI 能力時間線 | 5 | `#/presenter/02/0` |
 | 03 | AI 翻車 | 4 | `#/presenter/03/0` |
 | 04 | Prompt Archaeology | 4 | `#/presenter/04/0` |
+| 05 | Prompt 五大元素 | 8 | `#/presenter/05/0` |
+| 06 | Conversation | 8 | `#/presenter/06/0` |
+| 08 | IDEA → REALITY | 7 | `#/presenter/08/0` |
+| 14 | DONE ≠ RIGHT | 9 | `#/presenter/14/0` |
+| 15 | 方法論 recap | 8 | `#/presenter/15/0` |
+| 16 | Showtime 轉場 | 4 | `#/presenter/16/0` |
+| 17 | AI Production Room | 1 | `#/presenter/17/0` |
+| 18 | Premiere | 5 | `#/presenter/18/0` |
+
+Scene 07 與 Scene 09–13 沒有排進 deck，編號刻意不補。
 
 ### Scene 01 beat 對照
 
@@ -55,17 +66,60 @@ npm run preview  # 預覽 build 結果
 | 9 | 2026：第三個 R |
 | 10 | 2026：AI 回答「3 個」 |
 
+### Scene 14–18
+
+| Scene | 內容 |
+| --- | --- |
+| 14 | AI 回報 `DONE ✓`，人類逐項驗收後爆出問題，收在「完成 ≠ 正確／驗收才是最後一步」 |
+| 15 | 💡想 → 💬說 → ⚙️做 → 👀看 → 🔁改，收在「AI 不能替你『想要』」 |
+| 16 | 進 Live 前的 showtime 轉場：從「我做給你看」翻成「換我們一起做」 |
+| 17 | 投稿牆 → LOCK → Host 選風格（複選）→ 開始寫腳本 → reading → story → shot plan → generating → assembling → ready |
+| 18 | 預留 16:9 成片版位 + Credits，最後以 `09.png` 作 closing callback |
+
+素材：Scene 17 使用 `DROPTHEBEE.png`，Scene 18 結尾使用 `09.png`。
+
+Scene 17 是唯一由畫面互動（而非按鍵 beat）推進的場次，因此只有 1 個 beat：
+LOCK、風格選擇、開始寫腳本都是點擊操作。
+
 ## 目錄
 
 ```
 src/
   app/         路由、鍵盤控制、App shell
   components/  Stage、Backdrop、Reveal、PresenterChrome
+  film/        Scene 17 / 18 的 FilmState 與 FilmSessionClient（本輪為 mock）
   scenes/      每個 scene 一個檔案，index.ts 是 deck 順序
-  styles/      global / stage / scenes
+  styles/      global / stage / scenes / scenes1418
   types/       Scene 與 beat 型別
 ```
 
-`src/scenes/` 另外已經有 Scene05 / Scene06 / Scene08，目前只從 `index.ts` 匯出，還沒有排進上面的 deck 順序
-
 Scene 圖片直接引用 repo 根目錄的原圖，未經修改
+
+## Scene 17 / 18：mock → Live Session 的替換點
+
+Scene 17 / 18 **完全是 mock state**：沒有後端、沒有 Worker、沒有 secrets、沒有任何
+API 呼叫（fal.ai / OpenRouter / LTX 皆未接）。Scene 18 credits 裡的
+`AI Director / Model Routing / Video Generation / AI Platform / Video Assembly`
+是**未來**正式 runtime 的 production credits 文案，不是本輪實際跑過的東西。
+
+`FilmState` 從一開始就寫成「伺服器會給的樣子」：可序列化、帶單調遞增的 `revision`。
+UI 永遠只做兩件事 —— **讀 snapshot**、**送 command**，沒有任何畫面自己跑進度。
+
+```
+src/film/
+  types.ts          FilmState / FilmPhase / Submission / Shot / Story / 風格清單
+  client.ts         FilmSessionClient 介面（getSnapshot / subscribe / commands）
+  mockClient.ts     MockFilmSessionClient — 本輪用的記憶體版狀態機
+  factory.ts        createFilmSessionClient() ← 唯一的替換點
+  FilmProvider.tsx  useFilmState() / useFilmCommand()
+  selectors.ts      Scene 18 credits 由 FilmState 推導
+```
+
+接上真的 Live Session 時，只要實作同一個 `FilmSessionClient`（WebSocket/SSE 收
+snapshot、HTTP 送 command），然後改 `factory.ts` 的一行：
+
+```ts
+return new LiveFilmSessionClient(import.meta.env.VITE_FILM_SESSION_URL)
+```
+
+Scene 17 / 18 的 UI 不需要重寫 —— 沒有任何場景直接 import 過 mock。
