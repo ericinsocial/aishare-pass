@@ -1,0 +1,187 @@
+.s14 {
+  background:
+    radial-gradient(760px 420px at 18% 22%, rgba(87, 217, 138, 0.07), transparent 68%),
+    radial-gradient(760px 480px at 84% 68%, rgba(255, 93, 84, 0.08), transparent 68%);
+}
+
+.s14-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 44px;
+  align-items: start;
+  padding-top: 26px;
+}
+
+.s14-done {
+  position: relative;
+  border: 1px solid #1f3a2a;
+  background: linear-gradient(180deg, #0d1712, #0a1210);
+  border-radius: 18px;
+  padding: 30px 28px 26px;
+  transition: border-color 400ms ease, filter 400ms ease;
+}
+
+.s14-done.busted {
+  border-color: #4a1f1d;
+  filter: saturate(0.5);
+}
+
+.s14-done .who {
+  font: 700 12px/1 var(--mono);
+  letter-spacing: 0.24em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.s14-done .verdict {
+  margin: 16px 0 4px;
+  font-size: 62px;
+  color: var(--green);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  transition: color 400ms ease;
+}
+
+.s14-done.busted .verdict {
+  color: #4d6b58;
+  text-decoration: line-through;
+  text-decoration-thickness: 5px;
+  text-decoration-color: var(--red);
+}
+
+.s14-done ul {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+}
+
+.s14-done li {
+  font-size: 15px;
+  color: var(--ink-dim);
+  display: flex;
+  gap: 9px;
+}
+
+.s14-done li b {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.s14-stamp {
+  position: absolute;
+  right: -14px;
+  bottom: -18px;
+  transform: rotate(-11deg) scale(0.85);
+  opacity: 0;
+  border: 3px solid var(--red);
+  color: var(--red);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font: 800 22px/1 var(--mono);
+  letter-spacing: 0.12em;
+  background: rgba(20, 8, 8, 0.86);
+  transition: opacity 260ms ease, transform 260ms cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+.s14-stamp.on {
+  opacity: 1;
+  transform: rotate(-11deg) scale(1);
+}
+
+.s14-check-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 700 13px/1 var(--mono);
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.s14-issues {
+  display: grid;
+  gap: 10px;
+}
+
+.s14-issue {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #2a1614;
+  background: linear-gradient(90deg, rgba(255, 93, 84, 0.09), rgba(255, 93, 84, 0.02));
+  border-radius: 12px;
+  padding: 12px 16px;
+  opacity: 0;
+  transform: translateX(22px);
+  transition: opacity 300ms ease, transform 300ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.s14-issue.in {
+  opacity: 1;
+  transform: none;
+}
+
+.s14-issue .x {
+  font-size: 18px;
+  color: var(--red);
+  text-align: center;
+}
+
+.s14-issue .t {
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.s14-issue .t small {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-top: 3px;
+}
+
+.s14-final {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 9, 0.93);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 22px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.s14-final.in {
+  opacity: 1;
+}
+
+.s14-final .eq {
+  font-size: 84px;
+}
+
+.s14-final .eq .no {
+  color: var(--red);
+}
+
+.s14-final .eq .yes {
+  color: var(--gold);
+}
+
+.s14-final .sub {
+  font-size: 30px;
+  color: var(--ink-dim);
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+.s14-final .sub b {
+  color: var(--ink);
+}
