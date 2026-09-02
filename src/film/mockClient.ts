@@ -3,6 +3,7 @@ import {
   STYLE_BY_ID,
   type FilmState,
   type Shot,
+  type ShotDetails,
   type Story,
   type StyleId,
   type Submission,
@@ -29,8 +30,11 @@ const READ_ELEMENT_MS = 420
 const STORY_MS = 1100
 const SHOT_PLAN_MS = 1200
 const SHOT_MS = 1500
-const ASSEMBLY_TICK_MS = 180
-const ASSEMBLY_TICKS = 12
+const ASSEMBLY_TICK_MS = 260
+const ASSEMBLY_TICKS = 14
+
+/** Every shot is the same length, so N shots is a runtime you can say out loud. */
+const SHOT_DURATION_SEC = 10
 
 let seq = 0
 const nextId = (prefix: string) => `${prefix}_${(seq += 1).toString(36)}`
@@ -91,24 +95,98 @@ function buildStory(submissions: Submission[], styles: StyleId[]): Story {
   }
 }
 
+/**
+ * The shot plan.
+ *
+ * Every locked element gets its own shot: the promise on stage is that the
+ * film uses *all* of them, so the plan has to visibly account for all of them.
+ * The bookends (OPEN / CHAOS / RESOLVE) are what make those element shots read
+ * as one continuous story rather than a pile of unrelated clips, which is why
+ * every shot carries an explicit `continuity` line.
+ */
 function buildShots(story: Story, submissions: Submission[], styles: StyleId[]): Shot[] {
   const styleLabel = styles.map((s) => STYLE_BY_ID[s].label).join(' × ')
-  const specs: Array<[string, string]> = [
-    ['OPEN', `空景，城市在呼吸。${styleLabel}的光。`],
-    ['INTRO_A', `建立鏡頭：${submissions[0 % submissions.length].element}登場。`],
-    ['INTRO_B', `${submissions[1 % submissions.length].element}第一次被看見，特寫。`],
-    ['TURN', story.beats[1]?.text ?? '中段轉折。'],
-    ['CHAOS', `所有元素同時出現在同一個畫面，鏡頭來不及跟。`],
-    ['RESOLVE', story.beats[2]?.text ?? '收尾。'],
-    ['TAG', '黑畫面前最後一個荒謬的兩秒。'],
+  const settings = ['清晨的街口', '騎樓底下', '燈還沒關的辦公室', '巷子裡的鐵梯', '便利商店門口']
+  const cameras = [
+    '中景，手持，微微跟著呼吸晃',
+    '特寫，固定機位',
+    '過肩，慢慢推近',
+    '低角度仰拍，廣角',
+    '橫移，跟著走',
   ]
-  return specs.map(([slug, prompt], i) => ({
+  const sounds = ['街上的車流與腳步', '冷氣壓縮機的低頻', '雨打在鐵皮上', '遠處的廣播聲', '室內的日光燈嗡嗡聲']
+
+  const specs: Array<{ slug: string; prompt: string; details: ShotDetails }> = [
+    {
+      slug: 'OPEN',
+      prompt: `空景，城市在呼吸。${styleLabel}的光先進來。`,
+      details: {
+        who: '（空景，人還沒進來）',
+        action: '把這個世界的第一口氣交代完',
+        setting: '天剛亮的城市邊緣',
+        continuity: '全片第一顆 — 這一鏡的光決定後面每一鏡的光',
+        camera: '大遠景，緩慢推軌',
+        line: '旁白：「這一天，本來是正常的。」',
+        sound: '遠處車聲、鐵捲門、一兩聲鳥叫',
+      },
+    },
+    ...submissions.map((s, i) => {
+      const prev = i === 0 ? null : submissions[i - 1]
+      return {
+        slug: `EL_${String(i + 1).padStart(2, '0')}`,
+        prompt: `${s.element}正式進場，做出只有它會做的事。`,
+        details: {
+          who: s.element,
+          action: `第一次讓人看清楚${s.element}到底是什麼`,
+          setting: settings[i % settings.length],
+          continuity: prev
+            ? `鏡頭還沒離開${prev.element}，${s.element}就從畫面邊緣進來`
+            : '接上一鏡的空景，第一個東西走進這個世界',
+          camera: cameras[i % cameras.length],
+          line:
+            i % 2 === 0
+              ? '沒有台詞，只有動作'
+              : '旁白：「到這裡為止，都還可以解釋。」',
+          sound: sounds[i % sounds.length],
+        },
+      }
+    }),
+    {
+      slug: 'CHAOS',
+      prompt: '所有元素同時出現在同一個畫面，鏡頭來不及跟。',
+      details: {
+        who: `全部 ${submissions.length} 個元素同框`,
+        action: '各做各的事，然後互相撞在一起',
+        setting: '前面出現過的地點被擠進同一條街',
+        continuity: `承接前 ${submissions.length} 顆，每一個東西都必須認得出來`,
+        camera: '廣角橫搖，跟不上，刻意失焦一次',
+        line: story.beats[1]?.text ?? '中段轉折。',
+        sound: '所有環境音疊在一起，然後突然全部消失',
+      },
+    },
+    {
+      slug: 'RESOLVE',
+      prompt: story.beats[2]?.text ?? '收尾。',
+      details: {
+        who: submissions[submissions.length - 1]?.element ?? '最後一個元素',
+        action: '做出全片唯一一個正確的決定',
+        setting: '第一顆鏡頭的同一個地方，光已經變了',
+        continuity: '回到 OPEN 的機位，讓觀眾知道這是同一個故事',
+        camera: '大遠景，機位與 OPEN 完全相同',
+        line: '旁白：「然後大家假裝什麼都沒發生。」',
+        sound: '只剩下風，和一個沒關好的門',
+      },
+    },
+  ]
+
+  return specs.map((spec, i) => ({
     id: nextId('shot'),
     index: i + 1,
-    slug,
-    prompt,
-    durationSec: 4,
+    slug: spec.slug,
+    prompt: spec.prompt,
+    durationSec: SHOT_DURATION_SEC,
     status: 'pending' as const,
+    details: spec.details,
   }))
 }
 
@@ -237,6 +315,16 @@ export class MockFilmSessionClient implements FilmSessionClient {
   private readElement(i: number) {
     const submissions = this.state.submissions
     if (i >= submissions.length) {
+      // The promise made on stage: every element goes in, none get dropped.
+      this.patch({
+        director: {
+          ...this.state.director,
+          log: [
+            ...this.state.director.log,
+            `all ${submissions.length} elements read — 0 dropped ✓`,
+          ],
+        },
+      })
       this.later(() => this.produceStory(), STORY_MS)
       return
     }
@@ -307,7 +395,7 @@ export class MockFilmSessionClient implements FilmSessionClient {
     this.patch({
       phase: 'assembling',
       currentShot: 0,
-      assembly: { progress: 0, step: 'concat shots' },
+      assembly: { progress: 0, step: '接上每一顆鏡頭' },
     })
     this.assemblyTick(1)
   }
@@ -317,7 +405,7 @@ export class MockFilmSessionClient implements FilmSessionClient {
       const total = this.state.shots.reduce((sum, s) => sum + s.durationSec, 0)
       this.patch({
         phase: 'ready',
-        assembly: { progress: 1, step: 'done' },
+        assembly: { progress: 1, step: '完成' },
         film: {
           videoUrl: null, // mock run — Scene18 renders the empty 16:9 frame
           posterUrl: null,
@@ -327,7 +415,7 @@ export class MockFilmSessionClient implements FilmSessionClient {
       })
       return
     }
-    const steps = ['concat shots', 'crossfade', 'colour pass', 'mux audio', 'encode h264']
+    const steps = ['接上每一顆鏡頭', '轉場與節奏', '調光統一色溫', '疊上聲音', '輸出成一支完整影片']
     this.later(() => {
       this.patch({
         assembly: {

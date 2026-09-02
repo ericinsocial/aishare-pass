@@ -91,6 +91,31 @@ export interface Story {
 
 export type ShotStatus = 'pending' | 'generating' | 'done'
 
+/**
+ * What a single shot actually specifies, beyond one line of prompt.
+ *
+ * Optional on the wire: a shot is still a valid shot with a prompt alone, and
+ * the production room renders whichever of these fields it is given. Nothing
+ * here is required for the pipeline to run — it is what the room shows on a
+ * shot card so the audience can see a shot is a spec, not a wish.
+ */
+export interface ShotDetails {
+  /** 誰在畫面裡 */
+  who: string
+  /** 做什麼 */
+  action: string
+  /** 場景 */
+  setting: string
+  /** 承接上一鏡 — what this shot picks up from the one before it. */
+  continuity: string
+  /** 攝影機 */
+  camera: string
+  /** 台詞／旁白 */
+  line: string
+  /** 環境聲音 */
+  sound: string
+}
+
 export interface Shot {
   id: string
   /** 1-based, matches "generating shot 3/8". */
@@ -99,6 +124,7 @@ export interface Shot {
   prompt: string
   durationSec: number
   status: ShotStatus
+  details?: ShotDetails
 }
 
 export interface DirectorState {

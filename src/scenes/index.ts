@@ -11,10 +11,14 @@ import { Scene10, SCENE_10_BEATS } from './Scene10'
 import { Scene11, SCENE_11_BEATS } from './Scene11'
 import { Scene12, SCENE_12_BEATS } from './Scene12'
 import { Scene14, SCENE_14_BEATS } from './Scene14'
-import { Scene15, SCENE_15_BEATS } from './Scene15'
+// Scene 15 is still in the folder but no longer in the deck: its 想→說→做→看→改
+// recap repeats Scene 08, which already owns the method.
 import { Scene16, SCENE_16_BEATS } from './Scene16'
 import { Scene17, SCENE_17_BEATS } from './Scene17'
 import { Scene18, SCENE_18_BEATS } from './Scene18'
+import { Scene19, SCENE_19_BEATS } from './Scene19'
+import { Scene20, SCENE_20_BEATS } from './Scene20'
+import { Scene21, SCENE_21_BEATS } from './Scene21'
 
 /**
  * Deck order. The slug is the URL segment: #/presenter/<slug>/<beat>
@@ -82,13 +86,9 @@ export const scenes: Scene[] = [
     beats: SCENE_11_BEATS,
     view: Scene11,
   },
-  {
-    slug: '12',
-    title: '罵得有規格',
-    beats: SCENE_12_BEATS,
-    view: Scene12,
-  },
-  // Scene 13 has no final version; the deck steps from 12 straight to 14.
+  // AI reports DONE before we find out whether it is right, so Scene 14 comes
+  // first and Scene 12 is the answer to what it turns up. Slugs stay put — this
+  // is a running order, not a renumbering.
   {
     slug: '14',
     title: 'DONE ≠ RIGHT',
@@ -96,27 +96,47 @@ export const scenes: Scene[] = [
     view: Scene14,
   },
   {
-    slug: '15',
-    title: '方法論 recap',
-    beats: SCENE_15_BEATS,
-    view: Scene15,
+    slug: '12',
+    title: '罵得有規格',
+    beats: SCENE_12_BEATS,
+    view: Scene12,
   },
+  // Scene 13 has no final version, and Scene 15 was dropped from the running
+  // order; both files stay where they are and neither number is reused.
   {
     slug: '16',
-    title: 'Showtime 轉場',
+    title: '不要講了，直接現場做一個',
     beats: SCENE_16_BEATS,
     view: Scene16,
   },
   {
     slug: '17',
-    title: 'AI Production Room',
+    title: 'Live Session · AI Production Room',
     beats: SCENE_17_BEATS,
     view: Scene17,
   },
   {
     slug: '18',
-    title: 'Premiere',
+    title: '剪輯 → READY → 首映',
     beats: SCENE_18_BEATS,
     view: Scene18,
+  },
+  {
+    slug: '19',
+    title: '首映後：效果與路徑',
+    beats: SCENE_19_BEATS,
+    view: Scene19,
+  },
+  {
+    slug: '20',
+    title: 'Green callback：另外一條路',
+    beats: SCENE_20_BEATS,
+    view: Scene20,
+  },
+  {
+    slug: '21',
+    title: '黑貓、白貓、AI 貓',
+    beats: SCENE_21_BEATS,
+    view: Scene21,
   },
 ]

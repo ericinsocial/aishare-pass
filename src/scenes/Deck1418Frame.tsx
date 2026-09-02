@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 /**
- * Coordinate-space adapter for Scene 14–18.
+ * Coordinate-space adapter for the Scene 14–21 group.
  *
  * Those scenes were composed against a 1280x720 canvas, while the deck's
  * <Stage /> is 1920x1080. The canvas is pinned to the stage origin and scaled
@@ -10,6 +10,9 @@ import type { ReactNode } from 'react'
  *
  * The .deck1418 class also carries this group's colour tokens, keeping them
  * off :root so Scene 01–08 keep the stage palette from global.css.
+ *
+ * The name is kept as-is: renaming it would churn every scene that imports it
+ * for no behavioural gain.
  */
 export function Deck1418Frame({ children }: { children: ReactNode }) {
   return (
