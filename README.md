@@ -23,13 +23,22 @@ npm run preview    # 預覽 build 結果
 GitHub Pages 每次部署都會換掉所有帶 hash 的檔名（`index-XXXX.js`），舊檔案立刻從
 伺服器上消失，但 `index.html` 本身帶著約 10 分鐘的快取。所以剛部署完的那幾分鐘，
 瀏覽器可能拿著**舊的 `index.html`** 去要一個**已經不存在的 bundle** —— JS 404、
-React 沒掛載、`#root` 是空的，畫面就是**全黑**，而且看起來像整個網站掛掉。
+React 沒掛載、`#root` 是空的，畫面就是**全黑**，看起來像整個網站掛掉。
 
-`index.html` 最上面那段 inline script 就是在擋這件事：偵測到 script／link 載入失敗
-時，用 `?v=<timestamp>` 重新抓一次頁面繞過快取。只重試一次（避免無限 reload），
-並且保留 hash 裡的 scene/beat，所以就算講到一半才觸發，也會回到原本那一頁。
+兩層防護：
 
-投影前如果真的遇到空白，手動解法是 `Ctrl/Cmd + Shift + R` 強制重整。
+1. **`#root` 裡有一段開機提示**。React 掛載時會蓋掉它，所以它只會在「頁面下載到了、
+   但 bundle 沒跑起來」時出現。全黑的畫面什麼都不告訴你，這段文字至少講清楚是哪一種
+   失敗，上台時這個差別很重要。
+2. **`index.html` 開頭的 inline script**。`load` 之後再等 3 秒，如果 `#root` 仍然是
+   空的（或還停在開機提示），就用 `?v=<timestamp>` 重新抓一次頁面繞過快取。
+
+判斷條件刻意是「**畫面真的沒掛載**」，而不是「有某個資源載入失敗」—— error listener
+連 favicon 或瀏覽器外掛塞進來的標籤失敗都會觸發，為了那種東西跳轉會把一個本來正在
+正常載入的頁面打斷。只重試一次（避免無限 reload），並保留 hash 裡的 scene/beat，
+所以就算講到一半才觸發，也會回到原本那一頁。
+
+手動解法一樣是 `Ctrl/Cmd + Shift + R` 強制重整。
 
 ## Presenter 操作
 
