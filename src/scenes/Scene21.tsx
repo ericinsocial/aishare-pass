@@ -68,7 +68,7 @@ export function Scene21({ beat }: SceneProps) {
             <p className={`real${beat >= 10 ? ' on' : ''}`}>你真正要做的事情</p>
             <p className={`know${beat >= 11 ? ' on' : ''}`}>是先知道——</p>
             <p className={`which${beat >= 12 ? ' on' : ''}`}>
-              你到底要抓<span>哪一隻老鼠</span>
+              你到底要抓<span>哪一隻老鼠</span>？
             </p>
             <p className={`thanks${beat >= 13 ? ' on' : ''}`}>謝謝大家</p>
           </div>

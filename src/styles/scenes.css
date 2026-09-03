@@ -389,6 +389,13 @@
   padding: 96px 140px;
 }
 
+/* Two stacked lines inside one centred swap slot. */
+.s05__when {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
 .s05__struck {
   color: var(--ink-soft);
   text-decoration: line-through;

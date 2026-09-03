@@ -25,7 +25,7 @@ export function Scene14({ beat }: SceneProps) {
   return (
     <Deck1418Frame>
     <section className="scene s14">
-      <div className="scene-kicker">Scene 14 · Done ≠ Right</div>
+      <div className="scene-kicker">Done ≠ Right</div>
 
       <h1 className="punch" style={{ fontSize: 46, margin: '22px 0 0' }}>
         AI 說完成，<span style={{ color: 'var(--red)' }}>不代表完成</span>

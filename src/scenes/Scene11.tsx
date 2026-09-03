@@ -37,10 +37,13 @@ const ORDER = [
   'cibar-investment-video',
 ]
 
+/* A screenshot with no caption still goes on the wall — but it is labelled
+   by its position, never by its filename. The files are called cibar-*, and
+   the one project name the audience is ever shown is 刑事警察局反詐 AR APP. */
 const SHOTS = Object.entries(scanned)
-  .map(([path, src]) => {
+  .map(([path, src], i) => {
     const key = (path.split('/').pop() ?? '').replace(/\.\w+$/, '')
-    return { key, src, ...(CAPTIONS[key] ?? { title: key, sub: '' }) }
+    return { key, src, ...(CAPTIONS[key] ?? { title: `情境模組 ${i + 1}`, sub: '' }) }
   })
   .sort((a, b) => {
     const ia = ORDER.indexOf(a.key)
@@ -48,22 +51,10 @@ const SHOTS = Object.entries(scanned)
     return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib)
   })
 
-/* Real work without a screenshot in the repo — shown as text/UI cards,
-   deliberately not as invented screenshots. */
-const OTHER_WORK = [
-  {
-    title: '公司網站',
-    lines: ['形象頁與服務說明', '手機版重排', '自己改、當天上線'],
-  },
-  {
-    title: 'CRM',
-    lines: ['客戶名單集中管理', '跟進進度一眼看完', '報表不用再手拉'],
-  },
-  {
-    title: '活動管理',
-    lines: ['報名與名單匯出', '現場報到流程', '結案數字自動出'],
-  },
-]
+/* What the project above actually needed. This is not a list of jobs I have
+   done — it is the list of things I could not do, which is the only reason
+   the card next to the screenshots is worth showing at all. */
+const NOT_MY_FIELD = ['AR 辨識', 'App 開發', 'AI 影片', '互動流程', '後端串接']
 
 export const SCENE_11_BEATS = 5
 
@@ -78,7 +69,7 @@ export function Scene11({ beat }: SceneProps) {
       <div className={`s11__body ${finale ? 'dimmed' : ''}`}>
         <header className={`s11__head ${docked ? 'is-docked' : ''}`}>
           <Rise show className="kicker">
-            Scene 11 — Real Work
+            Real Work
           </Rise>
           <Rise show delay={120} as="h2" className="s11__h2">
             實際<span className="hl-amber">做出來</span>的東西
@@ -123,23 +114,28 @@ export function Scene11({ beat }: SceneProps) {
             </p>
           </Rise>
 
-          {OTHER_WORK.map((w, i) => (
-            <Rise
-              key={w.title}
-              show={beat >= 3}
-              delay={i * 140}
-              variant="pop"
-              className="s11__proj"
-            >
-              <span className="s11__badge">文字示意</span>
-              <p className="s11__proj-title s11__proj-title--sm">{w.title}</p>
-              <ul className="s11__proj-list">
-                {w.lines.map((l) => (
-                  <li key={l}>{l}</li>
-                ))}
-              </ul>
-            </Rise>
-          ))}
+          <Rise
+            show={beat >= 3}
+            variant="pop"
+            className="s11__proj s11__proj--mine"
+          >
+            <span className="s11__badge">原本不是我的專業</span>
+            <p className="s11__proj-title s11__proj-title--sm">這些我原本都不會</p>
+            <div className="s11__skills">
+              {NOT_MY_FIELD.map((skill, i) => (
+                <Rise
+                  key={skill}
+                  show={beat >= 3}
+                  delay={160 + i * 90}
+                  variant="pop"
+                  className="s11__skill"
+                >
+                  {skill}
+                </Rise>
+              ))}
+            </div>
+            <p className="s11__proj-done">但東西最後做出來了</p>
+          </Rise>
         </div>
       </div>
 

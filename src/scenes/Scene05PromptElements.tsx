@@ -29,8 +29,9 @@ const ELEMENTS: Element[] = [
  * Scene 05 — Prompt 五大元素
  *
  * The slide argues against reading these as a formula. They arrive one per
- * beat as self-checks, and the scene lands on 檢查有沒有漏掉 rather than on
- * writing five paragraphs every time.
+ * beat as self-checks, the moment of use is named up front (AI 回得不好的時候),
+ * and the scene closes by crossing out the belief Scene 04 set up —
+ * 「Prompt 越完整，AI 越厲害」 — in favour of 「不需要一次寫完」.
  */
 export function Scene05PromptElements({ beat }: SceneProps) {
   const checked = Math.max(0, Math.min(ELEMENTS.length, beat - FIRST_ITEM_BEAT + 1))
@@ -60,13 +61,19 @@ export function Scene05PromptElements({ beat }: SceneProps) {
           </Reveal>
 
           <Reveal show={beat === 1} from="up">
-            <p className="line-lg">
-              而是一張
-              <br />
-              <span className="hot-cool">「我是不是漏講什麼？」</span>
-              <br />
-              的 Checklist
-            </p>
+            {/* A checklist with no stated moment of use reads as a form to
+                fill in before sending. Naming the moment is what makes it
+                a diagnostic instead. */}
+            <div className="s05__when">
+              <p className="line-md">AI 回得不好的時候</p>
+              <p className="line-lg">
+                我回頭看這張
+                <br />
+                <span className="hot-cool">「我是不是漏講什麼？」</span>
+                <br />
+                的 Checklist
+              </p>
+            </div>
           </Reveal>
         </div>
 
@@ -104,13 +111,20 @@ export function Scene05PromptElements({ beat }: SceneProps) {
         {/* 收斂 */}
         <div className="s05__close">
           <Reveal show={beat >= 7} from="up">
-            <p className="line-md s05__struck-line">不是每次都要寫五大段 Prompt</p>
+            <p className="line-md s05__struck-line">
+              以前我以為，Prompt 寫得越完整，AI 就越厲害
+            </p>
           </Reveal>
           <Reveal show={beat >= 7} from="up" delay={180}>
             <p className="line-lg">
-              而是檢查自己
+              現在我知道
               <br />
-              有沒有<span className="hot">漏掉重要資訊</span>
+              Prompt <span className="hot">不需要一次寫完</span>
+            </p>
+          </Reveal>
+          <Reveal show={beat >= 7} from="up" delay={360}>
+            <p className="line-sm">
+              它回得不對的時候，我才回頭檢查自己有沒有漏掉重要資訊
             </p>
           </Reveal>
         </div>

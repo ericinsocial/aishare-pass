@@ -21,11 +21,7 @@ export function App() {
   return (
     <Stage>
       <SceneView beat={position.beat} />
-      <PresenterChrome
-        sceneSlug={scene.slug}
-        beat={position.beat}
-        beats={scene.beats}
-      />
+      <PresenterChrome beat={position.beat} beats={scene.beats} />
     </Stage>
   )
 }
